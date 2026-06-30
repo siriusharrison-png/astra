@@ -2,21 +2,28 @@
 
 ## Definition
 
-Astra is a local, cross-project, agent-loadable foundation for spec work, norms, memory, and reusable working patterns.
+Astra is a local, cross-project, agent-loadable foundation for design-experience support capabilities.
 
-It is not a feature product.
-It does not provide end-user capabilities.
+It is not a feature product and it does not provide end-user capabilities.
 It does not belong to one specific project.
+It does not need a homepage, marketing structure, or showcase structure.
 
 Its job is to collect the rules, structures, language, and decision logic that you keep reusing across projects, so Codex and Claude Code can work from the same base.
 
 One-line definition:
 
-> Astra is a local operating base for spec-driven work, designed to keep repeated design and engineering thinking consistent across tools, projects, and sessions.
+> Astra is a local operating base for design-support work, designed to keep repeated design and engineering thinking consistent across tools, projects, and sessions.
+
+## Distribution Rule
+
+- Developers maintain the canonical Astra repository
+- Consumers keep a local clone
+- Local agent configs load the local clone path
+- Updates flow through git, not by copying individual files by hand
 
 ## Usage Model
 
-Astra is intended to be used as a local repository that is synchronized from a remote source of truth.
+Astra is used as a local repository that is synchronized from a remote source of truth.
 
 The normal flow is:
 
@@ -27,18 +34,12 @@ The normal flow is:
 5. run convergence after a task finishes
 6. record reusable changes in `CHANGELOG.md`
 
-This means other people do not use your remote copy directly at runtime.
-They need a local copy or local clone on their machine, because their agent loads files from the local filesystem.
+Other people do not use the remote copy directly at runtime.
+They need a local clone on their machine because their agent reads from the local filesystem.
 
-If the source repository is updated, users should sync first so they always work from the latest version.
+If the source repository is updated, sync first so the latest version is loaded.
 
-Recommended automation:
-
-- run `bash scripts/sync.sh` before a session
-- run `bash scripts/converge.sh` after a task
-- wire the sync command into shell startup or your launch command if you want it to happen automatically
-
-Quickstart:
+## Quickstart
 
 ```bash
 git clone <astra-repo-url> ~/astra
@@ -46,20 +47,13 @@ cd ~/astra
 bash scripts/sync.sh
 ```
 
-If you want a single entry command for initial setup:
+If you want a single setup command:
 
 ```bash
 bash scripts/bootstrap.sh --repo <astra-repo-url> --target ~/astra
 ```
 
-After that, point your agent config to the local clone path and start working.
-
-## Distribution Rule
-
-- Developers maintain the canonical Astra repository
-- Consumers keep a local clone
-- Local agent configs load the local clone path
-- Updates flow through git, not by copying individual files by hand
+After that, point your agent config to the local clone path and start work.
 
 ## Agent Connection Example
 
@@ -84,25 +78,9 @@ Load the core files when the task is cross-project or spec-driven:
 /Users/your-name/astra/templates.md
 ```
 
-## Quickstart
-
-```bash
-git clone <astra-repo-url> ~/astra
-cd ~/astra
-bash scripts/sync.sh
-```
-
-If you want a single setup command:
-
-```bash
-bash scripts/bootstrap.sh --repo <astra-repo-url> --target ~/astra
-```
-
-After that, point your agent config to the local clone path and start work.
-
 ## Core Position
 
-- `Spec base`: turn discussion into structured specs
+- `Support base`: help design and experience work
 - `Norm base`: store stable rules, boundaries, and conventions
 - `Memory base`: retain reusable cross-project knowledge
 - `Prompt base`: keep different agents aligned on the same working language
@@ -118,6 +96,34 @@ The default question is:
 1. Does this task need exploration?
 2. If yes, how much exploration is actually useful?
 3. If no, can we move directly to judgment or execution?
+
+The working shape is usually:
+
+1. analyze
+2. decide
+3. apply
+4. converge
+
+## Higher-Level Method
+
+For complex problems, Astra may use a double-diamond pattern as a higher-level method.
+
+Use it when the problem needs broad exploration before a clean definition, and when the final answer benefits from a second pass of refinement.
+
+The double-diamond pattern is useful when:
+
+- the problem is genuinely ambiguous
+- the desired outcome is not yet stable
+- multiple solution directions need to be explored
+- the task requires both exploration and convergence
+
+Do not force it when:
+
+- the goal is already clear
+- the task is mostly logic or judgment
+- the output can be produced directly
+
+In other words, double diamond is a complex-problem capability, not a default rule.
 
 ## Path Selection
 
@@ -193,7 +199,7 @@ This is the most common pattern when:
 
 - not a project-specific knowledge dump
 - not a feature backlog
-- not a one-off design brief archive
+- not a one-off archive of project-specific outputs
 - not a replacement for the actual codebase
 - not a place for unstable business details that belong elsewhere
 
@@ -208,6 +214,7 @@ This is the most common pattern when:
 - keep the stable layer small and deliberate
 - use the evolving layer for lessons that repeat
 - use the working layer for active task material only
+- keep analysis outputs focused on the target project, not Astra, unless the lesson changes Astra's own operating rules
 
 ## Structure Principles
 
@@ -283,11 +290,20 @@ Good contents:
 - `principles.md`: long-lived principles
 - `standards.md`: stable conventions and rules
 - `patterns.md`: reusable thought and output patterns
+- `maps/`: reusable process maps and experience models
+- `maps/reference-analysis.md`: how to analyze live references and extract reusable patterns
 - `workflow.md`: task flow and convergence trigger rules
+- `application.md`: how to apply analysis output to the target project
 - `memory.md`: evolving cross-project knowledge
 - `convergence.md`: rules for turning task discussion into reusable updates
 - `templates.md`: structured templates for specs and reviews
 - `convergence-template.md`: copyable end-of-task convergence format
+- `templates/journey-map-template.md`: copyable user journey map format
+- `templates/reference-analysis-template.md`: copyable reference analysis format
+- `maps/task-flow-map.md`: task flow map structure
+- `maps/decision-flow-map.md`: decision flow map structure
+- `maps/role-map.md`: role map structure
+- `maps/state-map.md`: state map structure
 - `CHANGELOG.md`: append-only record of reusable updates
 - `scripts/sync.sh`: fetch and pull the latest repo version
 - `scripts/converge.sh`: append convergence records to the changelog

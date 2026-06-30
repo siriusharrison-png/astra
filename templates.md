@@ -91,6 +91,62 @@ This file stores structured templates for repeated work.
 - file
 - summary
 
+### Journey Map
+
+- user
+- scenario
+- stages
+- pain points
+- opportunities
+- outcome
+- next step
+
+### Reference Analysis
+
+- source
+- analysis goal
+- positioning
+- structure
+- interaction
+- visual language
+- messaging
+- transferable patterns
+- non-transferable specifics
+- recommendation
+
+### Task Flow Map
+
+- task goal
+- steps
+- bottlenecks
+- simplification opportunities
+- next actions
+
+### Decision Flow Map
+
+- decision
+- inputs
+- criteria
+- branches
+- result
+- open questions
+
+### Role Map
+
+- role list
+- responsibilities
+- handoffs
+- decision ownership
+- coordination risks
+
+### State Map
+
+- state list
+- triggers
+- transitions
+- edge cases
+- recovery rules
+
 ## Template Rule
 
 Do not add templates until the structure and standards are stable.

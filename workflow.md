@@ -17,6 +17,13 @@ For each task, follow this loop:
 5. run convergence
 6. update Astra if needed
 
+When the task includes reference analysis, insert application before convergence:
+
+1. analyze the reference
+2. identify reusable insight
+3. apply it to the target project
+4. converge reusable lessons back into Astra only when they are general enough
+
 ## Step 1: Frame the Task
 
 Before doing anything, identify:
@@ -68,6 +75,8 @@ Do not wait so long that the lesson gets lost.
 
 If the update is reusable, append it to `CHANGELOG.md` as part of the convergence step.
 
+If the lesson belongs to the target project only, keep it there and do not write it back into Astra.
+
 ## Step 6: Update Astra
 
 Update only the files that truly need it.
@@ -100,6 +109,8 @@ Use this workflow whenever a task involves:
 - cross-project judgment
 - repeated preference capture
 - any work that should improve Astra afterward
+- live reference analysis
+- extracting useful patterns from online pages or samples
 
 ## Workflow Rule
 
