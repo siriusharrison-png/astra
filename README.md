@@ -41,6 +41,12 @@ If the source repository is updated, sync first so the latest version is loaded.
 
 ## Quickstart
 
+Preferred one-line install command:
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/siriusharrison-png/astra/main/scripts/install.sh)
+```
+
 ```bash
 git clone <astra-repo-url> ~/astra
 cd ~/astra

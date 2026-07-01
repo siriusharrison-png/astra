@@ -25,3 +25,9 @@ The changelog is append-only.
   - action: update
   - file: templates.md, maps/user-journey-map.md, maps/task-flow-map.md, maps/decision-flow-map.md, maps/role-map.md, maps/state-map.md
   - summary: Added reusable map and reference-analysis templates for cross-project design and experience work.
+
+- [installation] One-line install entry added
+  - source: task discussion
+  - action: update
+  - file: README.md, INSTALL.md, scripts/install.sh
+  - summary: Added a curl-based one-line installer so Astra can be installed or synced from a single command.

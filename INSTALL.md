@@ -18,6 +18,12 @@ Clone the repository locally and point your agent config at the clone path.
 
 ## Quickstart
 
+Preferred one-line install command:
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/siriusharrison-png/astra/main/scripts/install.sh)
+```
+
 ```bash
 git clone <astra-repo-url> ~/astra
 cd ~/astra
