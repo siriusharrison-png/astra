@@ -119,3 +119,58 @@ The workflow should stay simple.
 If a step does not add value, do not add it.
 If a step is repeated often, make it explicit.
 If a step becomes noisy, move it out of the stable layer.
+
+---
+
+## Context Weighting
+
+Use these dimensions to adjust how heavily each path is weighted for your specific task.
+They do not change the paths themselves; they help choose which path to emphasize and when to transition between paths.
+
+### Output Scope Weight
+
+**One-off output?** → Weight execution heavier. Move faster toward delivery. Less convergence needed.
+
+**Reusable output?** → Weight exploration heavier. Invest in clarity and structure. Plan for convergence.
+
+**Unclear scope?** → Start with hybrid, let the task reveal what it needs.
+
+---
+
+### Cross-Project Relevance Weight
+
+**Astra-relevant discovery?** → Weight convergence heavily. This insight belongs in CHANGELOG.
+
+**Project-specific only?** → Keep in working layer. No Astra update needed. Execution or judgment path is usually enough.
+
+**Mixed (some reusable, some specific)?** → Hybrid path, converge only the general part.
+
+---
+
+### Handoff Weight
+
+**Next step is another agent/person?** → Weight clarity heavily. Invest in explicit explanation. Use patterns to scaffold understanding.
+
+**Next step is direct execution by you?** → Weight completeness over explanation. Execution path is often enough.
+
+**Next step is uncertain?** → Stay exploratory longer. Do not hand off half-formed decisions.
+
+---
+
+### Stability Weight
+
+**Stable decision?** → Safe to move into judgment or execution. The path is clear.
+
+**Uncertain territory?** → Extend exploration. Try small examples. Gather evidence before committing to a path.
+
+**Revisit scenario?** → When you discover a constraint mid-execution, switch back to exploratory temporarily. Reweight before continuing.
+
+---
+
+### Convergence Timing Weight
+
+**High reuse probability?** → Converge immediately after review. Capture the insight while fresh.
+
+**Medium reuse probability?** → Mark for next convergence pass. Collect several lessons together.
+
+**Low reuse probability or project-specific?** → Do not converge. Archive in the project, not in Astra.

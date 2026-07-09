@@ -21,6 +21,39 @@ This file stores structured templates for repeated work.
 - Templates should make the next action obvious
 - Templates should not duplicate stable rules
 - Templates should be written in English first
+- When choosing a template, reference the quality dimensions in `standards.md` to guide what to emphasize
+
+---
+
+## Quality Dimensions in Templates
+
+When filling out a template, use these guidelines:
+
+**Spec Draft:**
+- Prioritize Clarity (goal must be unambiguous) and Generativity (are all perspectives included?)
+- Check: Would another team understand this without asking?
+
+**Decision Record:**
+- Prioritize Criticality (have we examined the tradeoffs?) and Clarity (can others follow the reasoning?)
+- Check: Does this record why we chose this, not just what we chose?
+
+**Discussion Summary:**
+- Prioritize Clarity (is the summary obvious?) and Criticality (did we surface what is uncertain?)
+- Check: Could someone who was not in the meeting understand the current state?
+
+**Review Checklist:**
+- Prioritize Criticality (are we questioning assumptions?) and Refinement (are details considered?)
+- Check: Are we reviewing substance or just checking boxes?
+
+**Task Review to Convergence:**
+- Prioritize Generativity (does this capture reusable insight?) and Criticality (did we learn what worked and what did not?)
+- Check: Is this learning general enough for other projects?
+
+**Reference Analysis:**
+- Prioritize Generativity (have we gathered multiple viewpoints?) and Criticality (have we questioned what is transferable?)
+- Check: Could another project use these patterns without rewriting?
+
+---
 
 ## Suggested Templates
 
