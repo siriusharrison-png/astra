@@ -23,6 +23,21 @@ This file contains the stable conventions that should rarely change.
 - If a change would alter the meaning of the foundation, pause and confirm first
 - If a change only improves clarity without changing meaning, it may be added to the evolving layer
 
+## Documentation Sync Rule
+
+The "Quick Navigation" table in `README.md` is the entry point for users encountering specific situations.
+
+When you add, rename, remove, or significantly redefine a file in Astra:
+
+1. **Add**: Insert a new row in the Quick Navigation table with the situation, file path, and purpose
+2. **Rename**: Update the file path in the table; note the rename in CHANGELOG
+3. **Remove**: Remove the row from the table; preserve the history in CHANGELOG (not the table)
+4. **Redefine**: Update the "Purpose" column if the file's role has substantially changed; note in CHANGELOG
+
+The table is kept in sync with the actual structure. Do not let table entries drift from reality.
+
+Commit the table update in the same commit as the file change that prompted it.
+
 ---
 
 ## Design Quality Dimensions

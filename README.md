@@ -84,6 +84,26 @@ Load the core files when the task is cross-project or spec-driven:
 /Users/your-name/astra/templates.md
 ```
 
+## Quick Navigation
+
+Use this table when you encounter a specific situation and need to know which Astra file to reference.
+This table is kept in sync with the actual file structure; when files are added, removed, or significantly updated, this navigation table is updated in the same commit.
+
+| Your Situation | See This File | Purpose |
+|---|---|---|
+| I need to choose a path for this task | `workflow.md` Step 2 + Path Selection | Understand 4 path types and when to use each |
+| I'm uncertain about what makes good design work | `standards.md` Design Quality Dimensions | Reference 6 dimensions (Clarity, Refinement, Responsiveness, Composability, Generativity, Criticality) |
+| I need to understand which dimensions matter for my path | `patterns.md` Quality Dimensions in Paths | See which dimensions are primary vs secondary for exploratory/judgment/execution/hybrid paths |
+| I'm handing off work to someone else | `protocols/handoff-protocol.md` | Checklist for ensuring clarity, refinement, and completeness in handoffs |
+| I'm analyzing a design or article as a reference | `protocols/reference-analysis-protocol.md` | 5-step framework (Positioning → Structure → Decisions → Language → Transferability) |
+| I'm filling out a template and want to know what to emphasize | `templates.md` Quality Dimensions in Templates | See which dimensions matter for spec drafts, decisions, reviews, etc. |
+| I want to frame a task or scope work | `application.md` | Understand how to apply insights (Direct/Adapted/Rejected application types) |
+| I've finished work and want to capture reusable knowledge | `convergence.md` + `convergence-template.md` | Process for extracting insights and deciding which layer they belong in |
+| I'm recording a reusable insight into Astra's memory | `memory.md` | Rules for what makes a good cross-project memory entry |
+| I need to see the history of Astra updates | `CHANGELOG.md` | Append-only record of all convergence entries organized by date and category |
+
+---
+
 ## Core Position
 
 - `Support base`: help design and experience work
