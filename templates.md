@@ -57,6 +57,22 @@ When filling out a template, use these guidelines:
 
 ## Suggested Templates
 
+---
+
+## Protocols & Templates Relationship
+
+Some templates are used in conjunction with specific protocols.
+
+| Protocol | Related Templates | When to Use |
+|---|---|---|
+| `protocols/path-selection-protocol.md` | Spec Draft + Discussion Summary | After choosing your path, frame the task using these templates |
+| `protocols/reference-analysis-protocol.md` | Reference Analysis Template + Task Review to Convergence | When analyzing external references, use the analysis template; then use Task Review to capture what you learned |
+| `protocols/handoff-protocol.md` | Spec Draft + Transition Note | When preparing to hand off work, use these templates to ensure completeness and clarity |
+
+Not all templates require a protocol; some are standalone (Decision Record, Review Checklist).
+
+---
+
 ### Spec Draft
 
 - context
