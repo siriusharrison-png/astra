@@ -6,6 +6,38 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-07-09
+
+- [standards] Design quality dimensions added
+  - source: cross-project analysis (Perceptual Protocols reference)
+  - action: add
+  - file: standards.md
+  - summary: Added 6 design quality dimensions (Clarity, Refinement, Responsiveness, Composability, Generativity, Criticality) to provide vocabulary for evaluating design decisions across Astra work.
+
+- [workflow] Context weighting framework added
+  - source: task discussion
+  - action: add
+  - file: workflow.md
+  - summary: Added 5 context weighting dimensions (Output Scope, Cross-Project Relevance, Handoff, Stability, Convergence Timing) to adjust path selection for specific task contexts.
+
+- [protocols] Handoff and reference analysis protocols created
+  - source: task discussion
+  - action: add
+  - file: protocols/handoff-protocol.md, protocols/reference-analysis-protocol.md
+  - summary: Created two standalone protocols with dimension application guidance. Handoff protocol ensures clarity and completeness in work transfers; reference analysis protocol provides 5-step framework for extracting transferable insights.
+
+- [patterns] Quality dimensions integrated into path guidance
+  - source: task discussion
+  - action: update
+  - file: patterns.md, templates.md
+  - summary: Added quality dimension guidance to each path type and template type, clarifying which dimensions are primary vs secondary for specific work contexts.
+
+- [documentation] Quick navigation table and sync rule added
+  - source: task discussion
+  - action: add
+  - file: README.md, standards.md
+  - summary: Added Quick Navigation table to README mapping 10 common situations to relevant files. Added Documentation Sync Rule to standards.md ensuring table stays aligned with actual file structure.
+
 ### 2026-06-30
 
 - [bootstrap] Initial Astra structure
