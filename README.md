@@ -91,13 +91,14 @@ This table is kept in sync with the actual file structure; when files are added,
 
 | Your Situation | See This File | Purpose |
 |---|---|---|
-| I need to choose a path for this task | `workflow.md` Step 2 + Path Selection | Understand 4 path types and when to use each |
+| I need to choose a path for this task | `protocols/path-selection-protocol.md` | Decision framework (4 questions) to determine if you need Exploratory/Judgment/Execution/Hybrid path |
 | I'm uncertain about what makes good design work | `standards.md` Design Quality Dimensions | Reference 6 dimensions (Clarity, Refinement, Responsiveness, Composability, Generativity, Criticality) |
 | I need to understand which dimensions matter for my path | `patterns.md` Quality Dimensions in Paths | See which dimensions are primary vs secondary for exploratory/judgment/execution/hybrid paths |
 | I'm handing off work to someone else | `protocols/handoff-protocol.md` | Checklist for ensuring clarity, refinement, and completeness in handoffs |
 | I'm analyzing a design or article as a reference | `protocols/reference-analysis-protocol.md` | 5-step framework (Positioning → Structure → Decisions → Language → Transferability) |
+| I'm deciding how to use a reference insight in my project | `application.md` | Choose between Direct/Adapted/Rejected application types based on fit and risk |
 | I'm filling out a template and want to know what to emphasize | `templates.md` Quality Dimensions in Templates | See which dimensions matter for spec drafts, decisions, reviews, etc. |
-| I want to frame a task or scope work | `application.md` | Understand how to apply insights (Direct/Adapted/Rejected application types) |
+| I want to frame a task or scope work | `workflow.md` Step 1: Frame the Task | Questions to identify what is known, uncertain, and what path is appropriate |
 | I've finished work and want to capture reusable knowledge | `convergence.md` + `convergence-template.md` | Process for extracting insights and deciding which layer they belong in |
 | I'm recording a reusable insight into Astra's memory | `memory.md` | Rules for what makes a good cross-project memory entry |
 | I need to see the history of Astra updates | `CHANGELOG.md` | Append-only record of all convergence entries organized by date and category |
