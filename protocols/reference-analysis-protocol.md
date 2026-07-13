@@ -99,22 +99,23 @@ Reference `standards.md` for quality dimension definitions.
 
 ---
 
-### Phase 5: Transferability (Judge What Applies)
+### Phase 5: Transferability (Assess Fit)
 
 **Questions to ask:**
 
-- What could transfer to your context?
-- What is specific to their situation?
-- What is the rule vs. the example?
-- What would break if you copied this directly?
+- Is this insight relevant to your current problem?
+- What would need to change to make it work in your context?
+- What is too embedded in their situation to transfer?
 
 **Document:**
-- What seems universally useful
-- What is context-dependent
-- What you would need to adapt
-- What would not work in your context
+- What seems universally useful (principle level)
+- What is context-dependent (project specific)
+- What constraints would you need to work around
 
-**Dimension:** Composability + Criticality — Honest assessment of fit.
+**Dimension:** Composability + Criticality — Honest assessment of what fits and what doesn't.
+
+**Next Step:**
+Once you've assessed transferability, move to `application.md` to choose between Direct, Adapted, or Rejected application types based on your findings.
 
 ---
 
