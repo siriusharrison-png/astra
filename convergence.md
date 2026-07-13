@@ -142,7 +142,12 @@ If the change is reusable and worth tracking, append it to `CHANGELOG.md`.
 
 ### Step 6: Record
 
-If helpful, add a short note to memory or archive so the history is not lost.
+If the update belongs to the evolving layer and represents a cross-project pattern worth retaining, consider adding it to `memory.md` as well.
+
+The evolving layer lives in specific files (standards.md, patterns.md, workflow.md, templates.md, convergence.md).
+The memory layer provides a central place to store recurring preferences and patterns in chronological order.
+
+Not all evolving layer updates belong in memory—only those that represent validated preferences or judgment patterns that will genuinely appear in future work.
 
 ## Convergence Output Shape
 
