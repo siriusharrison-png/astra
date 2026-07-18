@@ -77,3 +77,9 @@ The changelog is append-only.
   - action: update
   - file: README.md, INSTALL.md, scripts/install.sh
   - summary: Added a curl-based one-line installer so Astra can be installed or synced from a single command.
+
+- [skills] Astra skill renamed to /astra for CLI speed
+  - source: UX improvement
+  - action: update
+  - file: skills/astra.md (renamed from astra-quickstart.md)
+  - summary: Shortened CLI command from /astra-quickstart to /astra. Now faster to invoke in any project. Installed globally to ~/.claude/skills/astra.md
