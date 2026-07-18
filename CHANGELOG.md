@@ -6,6 +6,20 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-07-18
+
+- [quickstart] Fast-reference guide for cross-project usage
+  - source: project testing to improve Astra usability
+  - action: add
+  - file: QUICKSTART.md
+  - summary: Created QUICKSTART.md with copy-paste ready templates, decision trees, and checklists for 10 common situations. Enables users to access Astra guidance from any project without reading 3+ files. Covers task framing, handoff, reference analysis, decision making, and convergence.
+
+- [standards] Documentation Sync Rule enforced by adding QUICKSTART to Quick Navigation table
+  - source: standards.md Documentation Sync Rule implementation
+  - action: update
+  - file: README.md Quick Navigation table
+  - summary: Added QUICKSTART.md as top-priority entry in Quick Navigation table (moved to first row), following Documentation Sync Rule that keeps table aligned with actual file additions. QUICKSTART becomes primary entry point for users in other projects needing fast guidance.
+
 ### 2026-07-09
 
 - [standards] Design quality dimensions added

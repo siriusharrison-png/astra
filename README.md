@@ -91,6 +91,7 @@ This table is kept in sync with the actual file structure; when files are added,
 
 | Your Situation | See This File | Purpose |
 |---|---|---|
+| **I'm in another project and need fast guidance** | `QUICKSTART.md` | Copy-paste ready prompts, templates, and decision trees for all common situations |
 | I need to choose a path for this task | `protocols/path-selection-protocol.md` | Decision framework (4 questions) to determine if you need Exploratory/Judgment/Execution/Hybrid path |
 | I'm uncertain about what makes good design work | `standards.md` Design Quality Dimensions | Reference 6 dimensions (Clarity, Refinement, Responsiveness, Composability, Generativity, Criticality) |
 | I need to understand which dimensions matter for my path | `patterns.md` Quality Dimensions in Paths | See which dimensions are primary vs secondary for exploratory/judgment/execution/hybrid paths |
