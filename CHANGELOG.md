@@ -92,3 +92,10 @@ The changelog is append-only.
   - action: update
   - file: skills/astra.md (renamed from astra-quickstart.md)
   - summary: Shortened CLI command from /astra-quickstart to /astra. Now faster to invoke in any project. Installed globally to ~/.claude/skills/astra.md
+
+- [evolving] Storybook page redesigned as a codex-style manual (legacy entry, retained for history)
+  - source: project-specific design iteration
+  - action: (project change, no Astra file touched)
+  - file: (not in Astra scope)
+  - summary: Storybook page upgraded from a display page to a browsable codex-style manual. Three changes: (1) stronger paper realism via spine gradient shadows, inset page edges, and a 135° background gradient; (2) tighter typographic rhythm — spacing reduced ~50%, adjusted font sizes for an academic tone; (3) restrained blockquote treatment — Quote/Note/Section backgrounds simplified, borders thinned. Implemented via layered inset box-shadow plus pseudo-element gradients for a 3D page-edge effect.
+  - note: This entry documents a change inside a specific project, not an Astra update. Per convergence.md ("do not capture one-off project noise / content that belongs only to a single task"), work like this should not go into Astra's CHANGELOG in future. Kept here for historical completeness only; normalized from a Chinese-only, unstructured entry appended by an earlier version of scripts/converge.sh.
