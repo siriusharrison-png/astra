@@ -63,3 +63,17 @@ Remove an entry from memory when:
 - A better rule has replaced it in the evolving layer
 
 Archive the entry in convergence history rather than deleting it; the historical record may be useful later.
+
+---
+
+## Entries
+
+## 2026-07-28 Pattern — Anchor interaction decisions to UX laws
+
+**Lesson:** For layout, navigation, form, and information-density decisions, reason from UX laws instead of taste — Fitts (target size/distance), Hick (option count), Miller (chunking). Design memory load for ~4 chunks, not 7 (Cowan 2001 corrected Miller's 7±2).
+
+**Why it matters:** These decisions recur in every project with a UI. Grounding them in named laws makes choices defensible and consistent across projects, and prevents the common mistakes (bigger-is-better, fewer-is-always-better, strict 7±2).
+
+**How to apply:** See `patterns.md` → Interaction Decision Pattern for formulas, the grouping/chunking universal lever, and the extended catalog. Cite the specific law when justifying a UI decision.
+
+**Confidence:** Medium — established literature, but not yet validated across 2+ Astra projects in practice.

@@ -52,6 +52,18 @@ When the work is done, the output should usually include:
 - the reusable rule or insight
 - the next action, if needed
 
+## Interaction Decision Pattern (UX Laws)
+
+When making layout, navigation, form, or information-density decisions, reason from established UX laws rather than taste. The three core laws cover most day-to-day cases:
+
+- **Fitts's Law (1954)** — `T = a + b·log₂(D/S+1)`. Bigger and closer targets are faster to hit. Enlarge touch targets; place primary actions at edges/corners/bottom. Caveat: oversized controls break hierarchy — balance reachability against composition.
+- **Hick's Law (1952)** — `RT = a + b·log₂(n)`. Decision time grows with the number of options. Reduce and group choices, use progressive disclosure, highlight a default. Caveat: over-pruning just pushes complexity into deeper levels — balance breadth against depth.
+- **Miller's Law (1956)** — ~7±2 chunks in short-term memory, **but design for ~4±1** (Cowan, 2001, corrected Miller's figure once chunking/rehearsal are controlled). Chunk long strings (phone 3-4-4), split dense flows into steps. 7±2 is a reference, not a rule.
+
+**Universal lever:** grouping/chunking satisfies both Hick (fewer choices per step) and Miller (less to hold at once). Combine all three — don't optimize one in isolation: fast to operate, fast to decide, light to remember.
+
+**Extended catalog** (less frequent cases): Jakob's Law (match familiar patterns), Tesler's Law (shift irreducible complexity to the system), Doherty Threshold (<400ms response), Peak–End Rule (design peaks and endings), Aesthetic–Usability Effect, Law of Proximity, Serial Position Effect, Von Restorff Effect, Zeigarnik Effect, Postel's Law. Canonical collection: Laws of UX (Jon Yablonski, lawsofux.com).
+
 ---
 
 ## Quality Dimensions in Paths

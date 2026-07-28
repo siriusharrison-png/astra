@@ -6,6 +6,15 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-07-28
+
+- [patterns][memory] Interaction decision pattern (UX laws) added to evolving layer
+  - source: interaction-design study cards (交互设计三大定律) + primary-literature verification
+  - action: add
+  - file: patterns.md, memory.md
+  - summary: Added an "Interaction Decision Pattern" to patterns.md covering the three core UX laws (Fitts 1954, Hick 1952, Miller 1956) with formulas, the grouping/chunking universal lever, the Cowan (2001) correction of Miller's 7±2 to ~4±1, and an extended catalog of 10 Laws of UX. Recorded a matching cross-project judgment preference in memory.md. Kept within the existing evolving + memory layers rather than adding a new reference/ directory — structure stays stable; content is reusable.
+  - note: An earlier draft created reference/interaction-design-laws.md; removed in favor of the evolving-layer approach to preserve the standard four-layer structure.
+
 ### 2026-07-18
 
 - [quickstart] Fast-reference guide for cross-project usage
