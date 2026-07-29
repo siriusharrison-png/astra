@@ -389,6 +389,10 @@ When Astra is used by an agent, the agent should:
 - keep the language English first
 - prefer reusable output over one-off prose
 - separate stable rules from working material
+- at the end of reusable work, proactively propose a convergence draft and wait for confirmation before writing (semi-automatic convergence; see `convergence.md`)
+- stay silent about convergence when nothing reusable emerged — silence is the correct default for most tasks
+
+Sync is handled automatically by a `SessionStart` hook (`scripts/astra-sync.sh`, silent + fast-forward-only + pull-only). Convergence stays deliberate and human-confirmed by design; it is never auto-saved.
 
 ## Convergence Principle
 

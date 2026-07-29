@@ -29,6 +29,29 @@ The agent should:
 - update the smallest relevant layer
 - keep the update in English first
 
+## Semi-Automatic Convergence Protocol
+
+Convergence is a deliberate review action, not an automatic save (see `README.md` and `memory.md`). Full automation would fill `CHANGELOG.md` and `memory.md` with noise and destroy the value of the foundation. The protocol below keeps the human in the loop while removing the effort of remembering to converge.
+
+### When the agent should proactively propose convergence
+
+At the end of a task, the agent evaluates silently whether anything reusable emerged. It proposes a convergence draft **only when at least one candidate clears the bar** in "What Can Be Captured" — a cross-project preference, a validated judgment pattern, a reusable rule, a template improvement, or a boundary clarification.
+
+If nothing clears the bar, the agent says nothing about convergence. Silence is the correct outcome for most tasks. Do not propose convergence for one-off project work, pure Q&A, or changes already obvious from the files.
+
+### The proposal shape
+
+When proposing, the agent presents a short draft using the Convergence Output Shape (source / layer / summary / action, plus optional rationale / confidence / file) and asks for a one-word confirmation. Keep the proposal compact — one to three candidates maximum, each one to three sentences.
+
+### The confirmation rule
+
+- The agent does **not** write to `CHANGELOG.md`, `memory.md`, or any stable/evolving file until the human confirms.
+- Evolving-layer additions need a simple "yes" / "存".
+- Stable-layer changes always require explicit confirmation, per Step 4 below.
+- After confirmation, the agent writes the smallest useful change and appends to `CHANGELOG.md` (via `scripts/converge.sh`).
+
+This is the semi-automatic contract: the agent handles detection, drafting, and writing; the human keeps the single decision of what enters the foundation.
+
 ## What Convergence Does
 
 Convergence performs four actions:

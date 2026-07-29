@@ -6,6 +6,14 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-07-29
+
+- [evolving] Automate Astra sync (hook) and formalize semi-automatic convergence
+  - source: user request: auto-load sync, verify /astra command, semi-automate convergence
+  - action: add
+  - file: scripts/astra-sync.sh, convergence.md, README.md
+  - summary: Added SessionStart hook running scripts/astra-sync.sh (silent, ff-only, pull-only) so Astra auto-syncs at session start. Formalized a Semi-Automatic Convergence Protocol in convergence.md and README Working Contract: agent proactively proposes a convergence draft at end of reusable work and writes only after human confirmation; stays silent when nothing reusable emerged. Fixed root cause: ~/astra did not exist (real repo at ~/Desktop/astra) so all ~/astra/scripts references silently failed — created symlink ~/astra -> ~/Desktop/astra.
+
 ### 2026-07-28
 
 - [patterns][memory] Interaction decision pattern (UX laws) added to evolving layer
