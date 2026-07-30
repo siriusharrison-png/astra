@@ -6,6 +6,11 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-07-30
+
+- [evolving] Convergence update
+  - summary: Add Gestalt grouping to the UX Laws pattern — 7 principles in priority order (proximity > similarity > continuity > closure), spacing as strongest signal with a tight/loose gap heuristic (8px within, 24px between), and three anti-patterns.
+
 ### 2026-07-29
 
 - [evolving] Automate Astra sync (hook) and formalize semi-automatic convergence

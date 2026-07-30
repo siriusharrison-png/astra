@@ -64,6 +64,29 @@ When making layout, navigation, form, or information-density decisions, reason f
 
 **Extended catalog** (less frequent cases): Jakob's Law (match familiar patterns), Tesler's Law (shift irreducible complexity to the system), Doherty Threshold (<400ms response), Peak–End Rule (design peaks and endings), Aesthetic–Usability Effect, Law of Proximity, Serial Position Effect, Von Restorff Effect, Zeigarnik Effect, Postel's Law. Canonical collection: Laws of UX (Jon Yablonski, lawsofux.com).
 
+**Gestalt grouping** — the whole is more than the sum of its parts; the eye
+auto-organizes scattered elements into groups. Before styling, answer: how many
+groups does the user see, which matters, where does the gaze go? Seven
+principles, in rough priority — **proximity > similarity > continuity > closure
+> figure-ground / simplicity / common-fate**; proximity and similarity carry
+most UI work.
+
+- *Which elements group together:* **Proximity** (distance is the strongest
+  signal — tight gap within a group, wide gap between groups); **Similarity**
+  (shared color/shape/size reads as one class); **Continuity** (eyes follow
+  aligned lines/curves); **Closure** (the mind completes partial shapes).
+- *Figure vs. ground:* **Contrast** pushes the subject forward; **Simplicity /
+  Prägnanz** favors simple, symmetric forms; **Common Fate** groups elements
+  that move or animate together.
+- *Levers & heuristic:* adjust spacing before style — e.g. a list item's title
+  and meta 8px apart, but 24px to the next item, makes scan boundaries obvious
+  (proximity); give same-role text identical color/weight for instant
+  association (similarity).
+- *Anti-patterns:* whitespace serves grouping, not emptiness — tune to
+  information density, more is not better; similarity needs only the core trait
+  (color/shape), not identical styling; principles are always in play at once —
+  combine, don't apply one in isolation.
+
 ---
 
 ## Quality Dimensions in Paths
