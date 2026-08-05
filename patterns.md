@@ -43,6 +43,16 @@ Before choosing a path, ask:
 
 This is a useful pattern for complex design work, not a universal rule.
 
+## Proxy-Based Persona Validation Pattern
+
+When you can't reach real users or behavioral data (common for B2B/developer platforms as a designer), validate an existing persona through **internal proxies** instead of collecting from scratch.
+
+- **Reframe the goal**: not "gather info" but "bring a written target and have proxies confirm/refute it". Turn each vague persona claim into a falsifiable hypothesis (a one-line statement someone can answer yes/no/actually-X).
+- **Match proxy to info shape**: data/analytics → What (ratios, funnels); customer success/support → Why (verbatim pain, drop-off); PM → alignment & disagreements; sales → decision chain & willingness to pay. Cross-verify What×Why across two proxies.
+- **Persuasion = lower their cost**: "I already wrote the hypotheses, you just judge — 20 min — I'll report back what you changed." Give each proxy their own payoff (fewer repeat tickets / data with impact / less rework).
+- **Tooling structure**: one file = one action (hypothesis master list, per-role scripts, questionnaire, ledger, processing guide). Split interview scripts into **[A] private battle-map** (goals, persuasion hooks, must-gets — hidden from interviewee) and **[B] neutral shared version** (screen-share and discuss together). In B, never state hypotheses as conclusions — phrase as neutral prompts so the interviewee doesn't just nod along.
+- **Sequence by reachability**: interview whoever you can reach first; honestly label unverified hypotheses as assumptions. Output a confidence-tagged persona v2 — its value is honesty (what holds vs. what's still a guess), not false precision.
+
 ## Output Pattern
 
 When the work is done, the output should usually include:
@@ -57,7 +67,7 @@ When the work is done, the output should usually include:
 When making layout, navigation, form, or information-density decisions, reason from established UX laws rather than taste. The three core laws cover most day-to-day cases:
 
 - **Fitts's Law (1954)** — `T = a + b·log₂(D/S+1)`. Bigger and closer targets are faster to hit. Enlarge touch targets; place primary actions at edges/corners/bottom. Caveat: oversized controls break hierarchy — balance reachability against composition.
-- **Hick's Law (1952)** — `RT = a + b·log₂(n)`. Decision time grows with the number of options. Reduce and group choices, use progressive disclosure, highlight a default. Caveat: over-pruning just pushes complexity into deeper levels — balance breadth against depth.
+- **Hick's Law (1952)** — `RT = a + b·log₂(n)`. Decision time grows with the number of options. Reduce and group choices, use progressive disclosure, highlight a default. Applies when the screen has a clear goal and users must decide/act fast; don't over-apply to complex form editing where task completeness and flow continuity matter more than minimizing options. Caveat: over-pruning just pushes complexity into deeper levels — balance breadth against depth.
 - **Miller's Law (1956)** — ~7±2 chunks in short-term memory, **but design for ~4±1** (Cowan, 2001, corrected Miller's figure once chunking/rehearsal are controlled). Chunk long strings (phone 3-4-4), split dense flows into steps. 7±2 is a reference, not a rule.
 
 **Universal lever:** grouping/chunking satisfies both Hick (fewer choices per step) and Miller (less to hold at once). Combine all three — don't optimize one in isolation: fast to operate, fast to decide, light to remember.

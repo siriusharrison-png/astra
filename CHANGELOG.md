@@ -6,6 +6,21 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-08-04
+
+- [evolving] Convergence update
+  - summary: Added an applicability boundary to Hick's Law in patterns.md: it serves 'clear goal + fast decide/act' screens; do not over-apply to complex form editing where task completeness and flow continuity outweigh minimizing options.
+
+### 2026-07-31
+
+- [patterns] Convergence update
+  - summary: 面向他人的方案陈述用'带开关的对照演示'替代静态描述：投影/机制类方案做成可交互 HTML，双维度切换器显性化正交逻辑，一个'关闭'开关反衬机制价值——本质是给评审方的 A/B 对比手段
+
+### 2026-07-31
+
+- [patterns] Convergence update
+  - summary: 内部代理法验证B端用户画像：够不到真实用户时，把画像拆成可证伪假设，找内部代理(数据经理给What/客户成功给Why/PM对分歧/销售补决策链)证实证伪。工具包一份文件=一个动作；分角色脚本拆【A作战地图不给对方看】+【B中立话题共享版一起聊】双模块，B里不把假设当结论说以防对方顺着点头。先约能触达的角色。
+
 ### 2026-07-30
 
 - [evolving] Convergence update
