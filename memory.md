@@ -77,3 +77,13 @@ Archive the entry in convergence history rather than deleting it; the historical
 **How to apply:** See `patterns.md` → Interaction Decision Pattern for formulas, the grouping/chunking universal lever, and the extended catalog. Cite the specific law when justifying a UI decision.
 
 **Confidence:** Medium — established literature, but not yet validated across 2+ Astra projects in practice.
+
+## 2026-08-06 Pattern — Check for a domain skill before producing methodology-bound visuals
+
+**Lesson:** Before building a professional infographic, journey map, or any methodology-bound visual, check whether a domain skill exists first. Generic frontend scaffolds (web-artifacts-builder, plain HTML) only solve "can render" — they do not make the *information* conform to the method. A journey map built without journey-mapping guidance looks like a diagram but carries the wrong content (matrix instead of flow, business funnel instead of user goals/pains/emotions).
+
+**Why it matters:** Surfaced when a hand-built journey "flow" came out as a matrix and the content missed research requirements. The fix was not more visual effort but the right skill (`journey-mapping` from cuellarfr/design-skills).
+
+**How to apply:** For journey/research/design visuals, load the relevant skill (journey-mapping, ux-research, design-critique, etc.) BEFORE choosing a visual form. When vetting a third-party skill: check the License first — skip noncommercial (e.g. PolyForm) in a commercial context, prefer MIT/Apache. For skill collections, clone and check name conflicts against the existing global set before installing; attach LICENSE + SOURCE.md provenance to each installed skill.
+
+**Confidence:** High — root cause was clear and the corrective action (install domain skill, license discipline) is broadly reusable.

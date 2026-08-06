@@ -6,6 +6,11 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-08-06
+
+- [evolving] Convergence update
+  - summary: Before producing professional infographics/journey maps, check for a domain skill first: generic frontend scaffolds only solve 'can render', not 'information matches methodology'. Vet third-party skill licenses before install — skip noncommercial licenses (e.g. PolyForm) in a commercial context, prefer MIT/Apache. For skill collections, clone and check name conflicts first, install only what's needed or the full set, and attach LICENSE + SOURCE.md provenance to each. Installed cuellarfr/design-skills (MIT, 10 UX skills) to global ~/.claude/skills/.
+
 ### 2026-08-04
 
 - [evolving] Convergence update
