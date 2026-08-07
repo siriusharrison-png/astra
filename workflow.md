@@ -52,6 +52,15 @@ During execution:
 - prefer reusable output over verbose explanation
 - keep working material separate from stable content
 
+## Temporary Code Discipline
+
+When a task needs throwaway scaffolding to verify a flow — a mock, a hardcoded return, a demo seed, a feature switch — treat it as radioactive: useful up close, forbidden in the shipped artifact.
+
+- **Never commit temporary verification code.** Remove it before commit, not just disable it. If a switch must stay, its default must be the safe/production value so an accidental commit cannot change runtime behavior.
+- **Make it findable and self-destructing.** Tag every temporary block with a unique, greppable marker (e.g. `MOCK-DO-NOT-COMMIT`) and grep for the marker as a pre-commit self-check.
+- **Every unresolved integration point gets an accurate marker.** Anything awaiting a real API, a backend contract, or a later replacement must carry a precise `TODO` / `MOCK` note stating the root cause and the exact alignment needed — not a vague "fix later." A leftover marker is a real statement, not filler; keep it truthful.
+- **Escalate the markers into the PR.** The PR description must call out every pending-integration and mock-replacement item explicitly so reviewers and backend can act on it; do not rely on in-code comments alone.
+
 ## Step 4: Review the Result
 
 After the main task is done, review:

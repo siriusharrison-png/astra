@@ -6,6 +6,14 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-08-07
+
+- [evolving] Convergence update
+  - source: apikey 创建流程验收：本地 mock 跑通交互后清理并走 PR
+  - action: add
+  - file: workflow.md
+  - summary: Temporary Code Discipline: never commit throwaway verification code (mock/hardcoded/demo seed/switch); safe default so accidental commit can't change runtime; unique greppable marker (MOCK-DO-NOT-COMMIT) + pre-commit grep self-check; every pending-integration point carries an accurate TODO/MOCK note stating root cause + needed alignment; escalate all such items into the PR description.
+
 ### 2026-08-06
 
 - [evolving] Convergence update
