@@ -6,6 +6,11 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-08-08
+
+- [patterns] Convergence update
+  - summary: 纯静态知识库型角色标准结构：agents/<name>/（config.json 去 engine/scripts、加 type=knowledge-base）+ knowledge/ markdown 知识层 + 团队页指针卡片 + hub 登记；承载信息供讨论而不跑程序，区别于 agent 型角色。来源：设计系统管家搭建。
+
 ### 2026-08-07
 
 - [evolving] Convergence update

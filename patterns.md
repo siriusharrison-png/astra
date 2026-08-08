@@ -141,3 +141,19 @@ Reference the dimensions defined in `standards.md`.
 
 **Secondary dimensions:**
 - **Criticality** — Throughout: maintain skepticism as new information arrives.
+
+## Team Role Pattern: Knowledge-Base vs Agent
+
+Two distinct role shapes when adding a member to a team repo. Pick by whether the role *runs* anything.
+
+**Agent-type role** — executes work: has `engine` and/or `scripts`, is triggered to *do* something (sync, generate, fetch). E.g. knowledge-keeper (syncs docs), posterdesigner (generates images).
+
+**Knowledge-base-type role** — carries information for discussion, runs nothing. Standard structure:
+- `agents/<name>/config.json` — drop `engine` and scripts; add `"type": "knowledge-base"`. Triggers are semantic labels ("when I want to talk about X"), not program entry points.
+- `agents/<name>/knowledge/` — markdown knowledge layer (catalogs, specs, guides). Extensible by adding files, not code.
+- Team page card — pointer buttons only (link to source repo / live site / team dir), no "open workbench"-style local-service button.
+- `hub.json` — register as a member with `reportTo`.
+
+**Key principle:** the team repo holds *pointers + knowledge*, not copied source. Source code stays in its own independent repo; the team adds a unified entry point, not a fork. MVP-first: start with one instance, extend by adding files under `knowledge/`.
+
+Origin: 设计系统管家 (design-system-keeper) — carries component-style info (Rams style MVP), links to independent rams-system repo.
