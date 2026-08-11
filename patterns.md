@@ -157,3 +157,12 @@ Two distinct role shapes when adding a member to a team repo. Pick by whether th
 **Key principle:** the team repo holds *pointers + knowledge*, not copied source. Source code stays in its own independent repo; the team adds a unified entry point, not a fork. MVP-first: start with one instance, extend by adding files under `knowledge/`.
 
 Origin: 设计系统管家 (design-system-keeper) — carries component-style info (Rams style MVP), links to independent rams-system repo.
+
+## Matrix Design Completeness Pattern
+
+When a design spans two or more crossing dimensions (role × module, state × action, device × context, plan × feature), two failures recur:
+
+- **Split each dimension into its true axes before enumerating.** A dimension that looks single often hides two orthogonal ones — treating it as one leaves a silent gap. Classic case: a "permission" is really *access* (can this actor reach the module) **and** *operation* (what can they do once inside); covering only reach leaves every operation ungoverned. Ask of each dimension: is this one axis or several collapsed into one?
+- **Mock/sample data must fill one full standard scenario.** Populate enough combinations that every value of every axis actually appears on screen. When the data is thin, missing combinations never render, so the gap stays invisible and gets shipped. Sufficient data is what makes an omission surface at review time.
+
+Origin: 权限管理设计复盘 — role × information: access permissions were designed, per-role operation permissions were missed because the mock data never exercised them.

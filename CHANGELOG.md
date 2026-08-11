@@ -6,6 +6,11 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-08-11
+
+- [evolving] Convergence update
+  - summary: Add Matrix Design Completeness Pattern to patterns.md: split each dimension into its true orthogonal axes (e.g. access vs operation), and fill mock data to one full standard scenario so missing combinations surface at review
+
 ### 2026-08-08
 
 - [patterns] Convergence update
