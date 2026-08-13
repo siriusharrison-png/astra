@@ -6,6 +6,16 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-08-13
+
+- [patterns] Convergence update
+  - summary: Cross-Artifact Consistency Pattern: judge multi-artifact systems by semantic uniformity of business facts (not volume/polish); produced via single source + downstream reference; boundary — semantic consistency only, defers to Composability on form; value scales with artifact count and team size
+
+### 2026-08-12
+
+- [evolving] Convergence update
+  - summary: Package a recurring explain-the-method ask as a self-contained skill (routing+boundaries+deliverable+discipline), not a one-off doc; methodology itself is open, so the private asset is the thin routing/discipline layer. See memory.md 2026-08-12.
+
 ### 2026-08-11
 
 - [evolving] Convergence update

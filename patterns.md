@@ -166,3 +166,14 @@ When a design spans two or more crossing dimensions (role × module, state × ac
 - **Mock/sample data must fill one full standard scenario.** Populate enough combinations that every value of every axis actually appears on screen. When the data is thin, missing combinations never render, so the gap stays invisible and gets shipped. Sufficient data is what makes an omission surface at review time.
 
 Origin: 权限管理设计复盘 — role × information: access permissions were designed, per-role operation permissions were missed because the mock data never exercised them.
+
+## Cross-Artifact Consistency Pattern
+
+When judging a system that spans many artifacts (multi-page, multi-screen, multi-state), the primary quality signal is whether the same business fact stays **semantically uniform** across every artifact — not output volume, not the polish of any single artifact.
+
+- **Why it is the primary signal:** inconsistency fails silently. A single-artifact flaw is visible at a glance; a cross-artifact mismatch (one object named `customerId` here and `leadId` there, a state's meaning drifting per page) only surfaces after walking the whole flow, and it compounds with scale.
+- **How consistency is produced:** not by vigilance, but by a single authoritative source that downstream artifacts reference — define the fact once, reference the stable ID everywhere else. Same mechanism as convergence's define-once.
+- **Boundary — semantic consistency, not formal sameness.** This governs business facts: naming, state model, a change propagating to all affected artifacts. It does **not** mean artifacts should look alike or share one layout — that is exactly the "rigid consistency / sameness everywhere" Composability (`standards.md`) warns against. When the two appear to conflict, Composability's judgment on form stands; this pattern claims only the semantic layer. It adds a lens, it does not override existing dimensions.
+- **Scope:** value rises with the number of artifacts and the number of people building them. For small or single-author work, semantic consistency is cheap and near-automatic — do not over-engineer it. The metric is tool-neutral; it applies to any multi-artifact design review. Cross-reference: [[Matrix Design Completeness Pattern]] — both use walkthrough/data to expose silently-missing cases.
+
+Origin: extracted from a Mihua Design article arguing page count no longer measures product-generation capability. The reusable kernel is the consistency-over-volume metric, separated from the vendor's seven-layer product framing.
