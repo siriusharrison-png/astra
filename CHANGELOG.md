@@ -8,6 +8,11 @@ The changelog is append-only.
 
 ### 2026-08-13
 
+- [evolving] Convergence update
+  - summary: Add Product-Led Landing Page Pattern (patterns.md): product-as-hero, dark canvas + self-luminous content w/ mandatory scrim, IA-as-argument, try-before-talk. Origin: Decart.ai landing page analysis.
+
+### 2026-08-13
+
 - [patterns] Convergence update
   - summary: Cross-Artifact Consistency Pattern: judge multi-artifact systems by semantic uniformity of business facts (not volume/polish); produced via single source + downstream reference; boundary — semantic consistency only, defers to Composability on form; value scales with artifact count and team size
 

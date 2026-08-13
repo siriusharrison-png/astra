@@ -177,3 +177,16 @@ When judging a system that spans many artifacts (multi-page, multi-screen, multi
 - **Scope:** value rises with the number of artifacts and the number of people building them. For small or single-author work, semantic consistency is cheap and near-automatic — do not over-engineer it. The metric is tool-neutral; it applies to any multi-artifact design review. Cross-reference: [[Matrix Design Completeness Pattern]] — both use walkthrough/data to expose silently-missing cases.
 
 Origin: extracted from a Mihua Design article arguing page count no longer measures product-generation capability. The reusable kernel is the consistency-over-volume metric, separated from the vendor's seven-layer product framing.
+
+## Product-Led Landing Page Pattern
+
+When a product has strong visual or generative output (video, imagery, live rendering, generated worlds), its landing page should let the product carry the persuasion. Four moves recur:
+
+- **Product-as-hero.** Use the real product output as the hero visual, not decorative illustration or abstract 3D. When the output itself is the proof, showing it beats describing it — credibility is not on the same scale. This only holds when the output is genuinely strong; a weak product exposed as hero backfires.
+- **Dark canvas, self-luminous content.** A near-black background makes colorful media appear to emit light, maximizing contrast and focus. Use for any interface built to spotlight visual content (portfolios, media libraries, players, galleries). Hard prerequisite: text or UI set over video/imagery **must** carry a scrim (gradient darkening layer) — without it, some frames destroy legibility. The scrim is the invisible condition that makes the whole approach safe.
+- **Information architecture as argument.** Navigation order can itself carry a thesis. Sequencing sections to trace a deliberate path (e.g. bottom-up from infrastructure to end product) signals a claim — here, full-stack ownership as a moat. IA sequence communicates positioning, not just wayfinding.
+- **Try before talk.** When a playable demo exists, the primary CTA is "Try X"; sales-facing CTAs ("Book a demo", "Contact") stay secondary. Let people experience the product before forcing a conversation. Applies only when the demo is self-serve and strong enough to sell itself.
+
+Boundary: these govern brand/story landing pages for output-strong products. They do not transfer to information-dense tool sites or utility screens, where fast scanning and findability outrank spectacle — a long dark video-heavy page costs load performance and makes information hard to locate. Cross-reference: [[Interaction Decision Pattern (UX Laws)]] for the scanning/findability side.
+
+Origin: extracted from a visual + information-architecture analysis of the Decart.ai landing page (real-time video / world-model lab). The reusable kernel is the four presentation moves for output-strong products, separated from Decart's specific brand execution.
