@@ -6,6 +6,11 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-08-18
+
+- [evolving] Convergence update
+  - summary: Add Design Style Identification Pattern (name style + defining signals before token extraction; source: Learn UI Name /styles)
+
 ### 2026-08-17
 
 - [evolving] Convergence update

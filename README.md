@@ -99,6 +99,7 @@ This table is kept in sync with the actual file structure; when files are added,
 | I'm analyzing a design or article as a reference | `protocols/reference-analysis-protocol.md` | 5-step framework (Positioning → Structure → Decisions → Language → Transferability) |
 | I need the standard name for a UI element (to tell an AI precisely) | `references/ui-naming-dictionary.md` + `patterns.md` Precise UI Naming Pattern | 62-component lookup (Web + macOS, EN/中文 + AppKit/SwiftUI terms) |
 | I want AI-generated UI to match a brand or reference style | `patterns.md` Design Token Extraction Pattern + `templates/design-system-spec-template.md` | Extract concrete tokens (color/type/shape) into a reusable DESIGN.md |
+| I need to identify or name a design style | `patterns.md` Design Style Identification Pattern | Name the style + lock 3-5 defining signals before extracting tokens (qualitative → quantitative) |
 | I'm deciding how to use a reference insight in my project | `application.md` | Choose between Direct/Adapted/Rejected application types based on fit and risk |
 | I'm filling out a template and want to know what to emphasize | `templates.md` Quality Dimensions in Templates | See which dimensions matter for spec drafts, decisions, reviews, etc. |
 | I want to frame a task or scope work | `workflow.md` Step 1: Frame the Task | Questions to identify what is known, uncertain, and what path is appropriate |

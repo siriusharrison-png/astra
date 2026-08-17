@@ -212,3 +212,14 @@ To make an AI produce on-brand UI, give it a design-token spec (a `DESIGN.md`) r
 - **Boundary:** extract tokens, not layouts. Copying a competitor's exact structure is theft and rarely fits your problem; extracting a color/type/shape system and re-composing it is legitimate design work. Don't hoard other people's specs wholesale — extract when you need one, keep a link to the source.
 
 Origin: Learn UI Name design-system library (learnui.qiaomu.ai/sites), which publishes copyable DESIGN.md files for 74 known sites. The reusable kernel is the extraction method + token structure, kept separate from any specific site's values.
+
+## Design Style Identification Pattern
+
+Before extracting a design into tokens, name the style and lock its defining signals. A style is a reproducible set of visual conventions; naming it tells you *what to look for* before you measure anything.
+
+- **Pairs with token extraction:** style identification is the qualitative layer, [[Design Token Extraction Pattern]] is the quantitative one. Name first, measure second — "this is neobrutalism" tells you to look for hard black borders and harsh offset shadows; "this is claymorphism" points you to fat rounded corners, soft shadows, pastels. The name scopes the token hunt.
+- **Fixed description dimensions:** decompose any style into the same axes so descriptions stay comparable — color (palette, saturation, emotional temperature), typography (family, weight, case, spacing), shape & border (radius, strokes, offset), texture & material (glass, paper grain, metal), decorative elements (starbursts, gears, scanlines, grids), motion & depth (layered shadow vs. flat vs. 3D), and historical context (origin, era, cultural meaning).
+- **Recognition workflow:** visual intuition → extract 3–5 *defining signals* (the few traits that make it unmistakable) → name it, ruling out look-alikes → state the core metaphor in one line ("glass", "paper", "machine") → output as a developer-usable brief.
+- **Boundary:** a style name is a communication anchor, not a cage. Most real interfaces blend or lightly reference a style rather than executing it purely; name the dominant influence, don't force a screen into one label. And identify styles from concrete signals, not vibes — if you can't name 3 defining signals, you haven't identified it yet.
+
+Origin: Learn UI Name style catalog (learnui.qiaomu.ai/styles), a governed catalog of 64 visual styles each described on consistent axes. The reusable kernel is the identification method + dimensional framework, kept separate from the specific style list (which is external, evolving data — not copied in).
