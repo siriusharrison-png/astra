@@ -9,6 +9,11 @@ The changelog is append-only.
 ### 2026-08-18
 
 - [evolving] Convergence update
+  - summary: Add WHY-ASTRA.md: with/without value-difference doc (not a feature list; honesty clause keeps the 'without' column real)
+
+### 2026-08-18
+
+- [evolving] Convergence update
   - summary: Add Design Style Identification Pattern (name style + defining signals before token extraction; source: Learn UI Name /styles)
 
 ### 2026-08-17
