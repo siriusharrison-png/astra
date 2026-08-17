@@ -190,3 +190,25 @@ When a product has strong visual or generative output (video, imagery, live rend
 Boundary: these govern brand/story landing pages for output-strong products. They do not transfer to information-dense tool sites or utility screens, where fast scanning and findability outrank spectacle — a long dark video-heavy page costs load performance and makes information hard to locate. Cross-reference: [[Interaction Decision Pattern (UX Laws)]] for the scanning/findability side.
 
 Origin: extracted from a visual + information-architecture analysis of the Decart.ai landing page (real-time video / world-model lab). The reusable kernel is the four presentation moves for output-strong products, separated from Decart's specific brand execution.
+
+## Precise UI Naming Pattern
+
+When directing an AI coding agent (or handing off a spec), name UI elements with their standard component names instead of vague descriptions. "Popover", "Combobox", "Segmented Control" — not "that little window", "the dropdown thing", "the toggle bar".
+
+- **Why it works:** naming ambiguity is the cheapest error to remove between design intent and implementation. A shared standard name collapses a round-trip of clarification into a single unambiguous token.
+- **How to apply:** when writing a spec or prompt, replace loose words with standard names. When you see an element but don't know its name, reverse-look-it-up. When moving between platforms, use the framework term. The lookup table lives in [[references/ui-naming-dictionary]] (Web + macOS, EN/中文 + AppKit/SwiftUI terms).
+- **Distinctions matter:** the table deliberately separates near-synonyms that behave differently — `Popover vs. Dropdown Menu vs. Tooltip`, `Modal vs. Drawer vs. Sheet`, `Badge vs. Chip vs. Pill vs. Tag`. Picking the right one carries interaction semantics, not just a label.
+- **Boundary:** this is about precision in communication, not vocabulary policing. Use the name that removes ambiguity for the reader; don't force obscure terms where a common word is already unambiguous.
+
+Origin: Learn UI Name (learnui.qiaomu.ai). The reusable kernel is the naming-precision rule; the term list is maintained separately as reference data so it can grow without touching this pattern.
+
+## Design Token Extraction Pattern
+
+To make an AI produce on-brand UI, give it a design-token spec (a `DESIGN.md`) rather than adjectives. Extract the spec by reading a reference site's concrete values, not its vibe.
+
+- **What to capture:** color system (exact hex + role: primary/accent/background), typography (heading/body/code families, weights, sizes, tracking, line-height), shape language (corner radius, pill vs. square), decoration strategy (photography/gradient/illustration/shadow), structural rhythm (whitespace, alternating bands). Template: [[templates/design-system-spec-template]].
+- **Why a spec beats adjectives:** "make it feel like Stripe" is unresolvable; `#635BFF accent, Söhne headings at 600, 8px radius, generous whitespace, subtle gradients` is executable. Precise values transfer; impressions don't.
+- **How it connects:** this is a focused specialization of `protocols/reference-analysis-protocol.md` Phase 4 (Visual Language) — same extract-the-value discipline, output shaped as a reusable token file. Reuse the extracted `DESIGN.md` across an entire project so all AI-generated screens stay consistent (see [[Cross-Artifact Consistency Pattern]] — the DESIGN.md becomes the single authoritative source).
+- **Boundary:** extract tokens, not layouts. Copying a competitor's exact structure is theft and rarely fits your problem; extracting a color/type/shape system and re-composing it is legitimate design work. Don't hoard other people's specs wholesale — extract when you need one, keep a link to the source.
+
+Origin: Learn UI Name design-system library (learnui.qiaomu.ai/sites), which publishes copyable DESIGN.md files for 74 known sites. The reusable kernel is the extraction method + token structure, kept separate from any specific site's values.

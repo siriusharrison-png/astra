@@ -6,6 +6,11 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-08-17
+
+- [evolving] Convergence update
+  - summary: Add UI Naming Dictionary reference + Precise UI Naming & Design Token Extraction patterns + DESIGN.md template (source: Learn UI Name)
+
 ### 2026-08-13
 
 - [evolving] Convergence update

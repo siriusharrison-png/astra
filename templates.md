@@ -67,6 +67,7 @@ Some templates are used in conjunction with specific protocols.
 |---|---|---|
 | `protocols/path-selection-protocol.md` | Spec Draft + Discussion Summary | After choosing your path, frame the task using these templates |
 | `protocols/reference-analysis-protocol.md` | Reference Analysis Template + Task Review to Convergence | When analyzing external references, use the analysis template; then use Task Review to capture what you learned |
+| `protocols/reference-analysis-protocol.md` (Phase 4) | Design System Spec Template | When extracting a brand's design tokens into a reusable DESIGN.md for AI-generated UI |
 | `protocols/handoff-protocol.md` | Spec Draft + Transition Note | When preparing to hand off work, use these templates to ensure completeness and clarity |
 
 Not all templates require a protocol; some are standalone (Decision Record, Review Checklist).
@@ -162,6 +163,16 @@ Not all templates require a protocol; some are standalone (Decision Record, Revi
 - transferable patterns
 - non-transferable specifics
 - recommendation
+
+### Design System Spec (DESIGN.md)
+
+- source
+- color system
+- typography
+- shape language
+- decoration strategy
+- structural rhythm
+- notes (borrow / adapt / avoid)
 
 ### Task Flow Map
 
