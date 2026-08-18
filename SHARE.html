@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Astra</title>
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --surface: #fffefb;
+    --ink: #1c1b18;
+    --ink-soft: #55524b;
+    --ink-faint: #8a867c;
+    --line: #e4e0d6;
+    --line-strong: #d3cec1;
+    --accent: #b4531f;
+    --accent-soft: #f0e4d8;
+    --with-bg: #f2f4ee;
+    --with-line: #cdd6c2;
+    --without-bg: #f6f1ec;
+    --radius: 14px;
+    --maxw: 720px;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14130f;
+      --surface: #1c1b16;
+      --ink: #ece8df;
+      --ink-soft: #b0aca1;
+      --ink-faint: #817d72;
+      --line: #2c2a23;
+      --line-strong: #3a382f;
+      --accent: #e08a4e;
+      --accent-soft: #33261a;
+      --with-bg: #1b201a;
+      --with-line: #354030;
+      --without-bg: #241d18;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    letter-spacing: 0.005em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* Masthead */
+  header.hero {
+    padding: 88px 0 56px;
+    border-bottom: 1px solid var(--line);
+  }
+  .kicker {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 20px;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(40px, 8vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 22px;
+  }
+  .lede {
+    font-size: clamp(18px, 2.4vw, 21px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 33em;
+    margin: 0;
+  }
+  .lede em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  /* Sections */
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+  .sec-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    margin: 0 0 12px;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(26px, 4.5vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 0 0 28px;
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    margin: 0 0 14px;
+  }
+  p { margin: 0 0 18px; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 650; color: var(--ink); }
+  .soft { color: var(--ink-soft); }
+
+  /* Pull-quote / one-liner */
+  blockquote {
+    margin: 28px 0;
+    padding: 22px 26px;
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
+  /* "Is not" list */
+  ul.plain { list-style: none; margin: 22px 0 0; padding: 0; }
+  ul.plain li {
+    position: relative;
+    padding: 0 0 0 26px;
+    margin: 0 0 12px;
+    color: var(--ink-soft);
+  }
+  ul.plain li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+  ul.plain li strong { color: var(--ink); }
+
+  /* Comparison cards */
+  .compare { margin: 26px 0; }
+  .compare + .compare { margin-top: 20px; }
+  .compare-title {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+  }
+  .rows { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .cell {
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    font-size: 15.5px;
+    line-height: 1.55;
+  }
+  .cell .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+  }
+  .cell.without { background: var(--without-bg); }
+  .cell.without .tag { color: var(--accent); }
+  .cell.with { background: var(--with-bg); border: 1px solid var(--with-line); }
+  .cell.with .tag { color: #4a7040; }
+  @media (prefers-color-scheme: dark) { .cell.with .tag { color: #8fbf80; } }
+  .cell p { margin: 0; color: var(--ink-soft); }
+
+  /* Synthesis line */
+  .synthesis {
+    margin-top: 28px;
+    padding: 22px 24px;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+    font-size: 16px;
+    color: var(--ink-soft);
+  }
+  .synthesis strong { color: var(--ink); }
+
+  /* Build aspects */
+  .aspect { padding: 24px 0; border-top: 1px solid var(--line); }
+  .aspect:first-of-type { border-top: 0; padding-top: 4px; }
+  .aspect h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+  }
+  .aspect p { color: var(--ink-soft); font-size: 15.5px; }
+  .aspect .layers {
+    list-style: none; margin: 0 0 14px; padding: 0;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .aspect .layers li {
+    font-size: 15px; color: var(--ink-soft);
+    padding-left: 18px; position: relative;
+  }
+  .aspect .layers li::before {
+    content: ""; position: absolute; left: 0; top: 0.62em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  }
+  .aspect .layers li b { color: var(--ink); font-weight: 650; }
+
+  /* Takeaway */
+  .takeaway {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 36px 32px;
+    margin-top: 8px;
+  }
+  .takeaway h2 { margin-bottom: 16px; }
+  .takeaway p { font-size: 17.5px; color: var(--ink-soft); }
+  .takeaway p strong { color: var(--ink); }
+
+  footer {
+    padding: 40px 0 72px;
+    color: var(--ink-faint);
+    font-size: 13px;
+    font-family: var(--mono);
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 560px) {
+    header.hero { padding: 56px 0 40px; }
+    section { padding: 44px 0; }
+    .rows { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">A local base for design-support work</p>
+    <h1>Astra</h1>
+    <p class="lede">A short, self-contained explainer. Not an install guide, not a product
+    pitch — it answers three things: <em>what this is</em>, <em>what it changes in
+    practice</em>, and if you want your own, <em>which aspects actually matter</em>.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="sec-num">01 — WHAT IT IS</p>
+    <h2>A foundation an agent loads before it works</h2>
+    <p>Instead of re-explaining your rules, your preferred component names, and your working
+    style every session, you keep them in one place the agent reads first. It is a base of
+    <strong>rules, structure, language, and decision logic</strong> — the things you reuse
+    across every project — so different tools and different sessions all start from the same
+    ground.</p>
+    <blockquote>A local operating base for design-support work, designed to keep repeated
+    thinking consistent across tools, projects, and sessions.</blockquote>
+    <ul class="plain">
+      <li><strong>Not</strong> a feature product, and not something end-users touch.</li>
+      <li><strong>Not</strong> a knowledge dump — content earns its place only if it's reusable across projects.</li>
+      <li><strong>Not</strong> a homepage or a showcase. It is infrastructure, loaded silently before work.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="sec-num">02 — WHAT IT CAN DO</p>
+    <h2>Value where ambiguity, precision, and repetition live</h2>
+    <p class="soft">Astra is not free value on every task. For a small, unambiguous, one-off
+    request it adds little. It shows up in three situations — and the <em>without</em> side
+    below isn't a strawman, it's how a capable agent actually behaves by default.</p>
+
+    <div class="compare">
+      <p class="compare-title">Ambiguous — “redesign the settings page”</p>
+      <div class="rows">
+        <div class="cell without">
+          <span class="tag">Without</span>
+          <p>Starts building immediately, guesses the goal, and you find out halfway it
+          solved the wrong problem — the real issue was <em>findability</em>, not looks.</p>
+        </div>
+        <div class="cell with">
+          <span class="tag">With</span>
+          <p>Frames before building. Goal unclear? A short exploratory pass turns “redesign”
+          into “make settings findable”, then works toward that.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare">
+      <p class="compare-title">Precision — “add a dropdown filter”</p>
+      <div class="rows">
+        <div class="cell without">
+          <span class="tag">Without</span>
+          <p>“Dropdown” is ambiguous, so it picks one. If you meant a searchable typeahead,
+          you learn that after it's built.</p>
+        </div>
+        <div class="cell with">
+          <span class="tag">With</span>
+          <p>Distinguishes <em>Combobox</em> vs <em>Dropdown Menu</em> vs <em>Popover</em>,
+          confirms which you mean, then builds. A standard name removes a round-trip.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare">
+      <p class="compare-title">Repetition — the same lesson, second time</p>
+      <div class="rows">
+        <div class="cell without">
+          <span class="tag">Without</span>
+          <p>A preference you set last week is gone next session; you re-explain it.</p>
+        </div>
+        <div class="cell with">
+          <span class="tag">With</span>
+          <p>The lesson was captured once and loads every session. Knowledge compounds
+          instead of resetting.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="synthesis">
+      <strong>The pattern:</strong> without a foundation, each task starts from zero and each
+      word is taken at face value; with one, tasks start framed, words are made precise, and
+      lessons persist. The return scales with ambiguity, precision-sensitivity, and
+      repetition — and is near-zero without them. Use it where it pays.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="sec-num">03 — HOW TO BUILD YOUR OWN</p>
+    <h2>You don't need this repo — you need these decisions</h2>
+    <p class="soft">If the idea fits how you work, build your own. The specific files matter
+    far less than the aspects below.</p>
+
+    <div class="aspect">
+      <h3>Layer by stability, not by topic</h3>
+      <ul class="layers">
+        <li><b>Stable</b> — what the base <em>is</em> and how it's used. Changes rarely and deliberately.</li>
+        <li><b>Evolving</b> — recurring patterns and validated lessons. Updated after tasks.</li>
+        <li><b>Working</b> — task-scoped drafts. Rewritten freely, never permanent.</li>
+      </ul>
+      <p>Daily churn should never destabilize your core rules. One undifferentiated pile
+      either goes stale or becomes too risky to touch.</p>
+    </div>
+
+    <div class="aspect">
+      <h3>Make methods the hook, keep data on demand</h3>
+      <p>Load the <em>method</em> every session; load the <em>data</em> only when needed. A
+      rule like “name UI elements with their standard component names” is small and always
+      worth loading — the 62-entry lookup table it points to is not. Separating the trigger
+      from the payload is what keeps the base from bloating.</p>
+    </div>
+
+    <div class="aspect">
+      <h3>Capture only what's reusable — and deliberately</h3>
+      <p>The failure mode of any knowledge base is the junk drawer. Two guards: a
+      <strong>reusability bar</strong> (if a lesson only helps one task, it dies in the
+      working layer) and <strong>confirm before writing</strong> (propose what to capture,
+      write only after a human agrees). Silence is the correct default.</p>
+    </div>
+
+    <div class="aspect">
+      <h3>One source of truth, synced — not copied</h3>
+      <p>Keep the canonical copy in one place; machines read a local copy and updates flow
+      through sync. The moment the same rule exists in two hand-copied places, they drift and
+      you can't trust either.</p>
+    </div>
+
+    <div class="aspect">
+      <h3>Pick one working language and stay in it</h3>
+      <p>Its whole job is to keep wording stable so behavior is stable. Mixed or drifting
+      vocabulary quietly reintroduces the ambiguity the base exists to remove.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="takeaway">
+      <h2>The takeaway</h2>
+      <p>The value isn't the content — it's the <strong>discipline</strong>: layer by
+      stability, hook methods to data, capture deliberately, sync from one source. Get those
+      right and the foundation stays small, trustworthy, and genuinely reusable. Get them
+      wrong and you've built another folder of documents nobody loads.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Astra · a local operating base for design-support work</div>
+</footer>
+
+</body>
+</html>
