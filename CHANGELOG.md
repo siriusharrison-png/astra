@@ -6,6 +6,16 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-08-25
+
+- [pattern] Convergence update
+  - summary: Annotation-only design-token migration: build a non-imported diff staging file (diff_*.scss) synced from design source, parse both old and new SCSS to a true file-diff (resolve var() chains to hex, never hand-type values), record every old-key decision in a single decisions.json source, categorize into 5 buckets (remap / rename / DELETE dead-code / KEEP-defer / theme-layer-alias), render an interactive visual workbench (color swatches + click-select + export JSON) so the designer defines mappings by eye, and keep the whole plan as SCSS comments — no business code or authoritative token file is touched until one unified find/replace pass executes it later. Migration binding rule is semantic-first, nearest-color-fallback (nearest-only would freeze approved palette shifts). Architectural note surfaced: the theme layer should not hold color keys.
+
+### 2026-08-25
+
+- [evolving] Convergence update
+  - summary: Add Reflective Questioning Pattern (反问机制) to patterns.md — DRAFT UNDER VALIDATION. Refined across rounds against superpowers' brainstorming into a closed loop: ground → probe → agree → push-to-artifact. Ground = do homework first (search / read current state / compare), only ask what only the user knows. Probe = each question stands on checked fact, reasons externalized, one at a time drilling deeper (not a flat multiple-choice batch). Agree = close on an explicitly shared conclusion, not a private inference. Push = drive the conclusion into a product, not talk alone. Core read stays diverge-vs-converge; stops when info is enough or user says go, re-enters on goal change; models user-agent parallel independent thinking. Structure agreed; 转转 to validate in real use.
+
 ### 2026-08-18
 
 - [evolving] Convergence update
