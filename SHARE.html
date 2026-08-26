@@ -4,399 +4,531 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Astra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f7f5f0;
-    --surface: #fffefb;
-    --ink: #1c1b18;
-    --ink-soft: #55524b;
-    --ink-faint: #8a867c;
-    --line: #e4e0d6;
-    --line-strong: #d3cec1;
-    --accent: #b4531f;
-    --accent-soft: #f0e4d8;
-    --with-bg: #f2f4ee;
-    --with-line: #cdd6c2;
-    --without-bg: #f6f1ec;
-    --radius: 14px;
-    --maxw: 720px;
-    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --bg: #100f0c;
+    --bg-2: #16140d;
+    --surface: #1c1a13;
+    --surface-2: #221f16;
+    --ink: #f3eee3;
+    --ink-soft: #b9b3a4;
+    --ink-faint: #7f7a6b;
+    --line: #2a271e;
+    --line-strong: #3b3629;
+    --accent: #f0a45c;
+    --accent-deep: #e0834a;
+    --accent-soft: #2b2013;
+    --with: #9ec98d;
+    --with-soft: #1a2116;
+    --without: #f0a45c;
+    --without-soft: #271c11;
+    --glow: rgba(240,164,92,0.35);
+    --radius: 16px;
+    --maxw: 900px;
+    --serif: "Fraunces", "Iowan Old Style", Palatino, Georgia, serif;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, Consolas, monospace;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #14130f;
-      --surface: #1c1b16;
-      --ink: #ece8df;
-      --ink-soft: #b0aca1;
-      --ink-faint: #817d72;
-      --line: #2c2a23;
-      --line-strong: #3a382f;
-      --accent: #e08a4e;
-      --accent-soft: #33261a;
-      --with-bg: #1b201a;
-      --with-line: #354030;
-      --without-bg: #241d18;
-    }
+    --mono: "IBM Plex Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html, body { margin: 0; height: 100%; }
   body {
-    margin: 0;
     background: var(--bg);
     color: var(--ink);
     font-family: var(--sans);
     font-size: 17px;
     line-height: 1.65;
-    letter-spacing: 0.005em;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow: hidden;
   }
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  /* Atmosphere */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(1100px 620px at 78% -8%, rgba(240,164,92,0.10), transparent 60%),
+      radial-gradient(900px 700px at 10% 105%, rgba(158,201,141,0.05), transparent 55%),
+      var(--bg);
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.05;
+    background-image:
+      linear-gradient(var(--line-strong) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-strong) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 120% 80% at 50% 40%, #000 25%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 120% 80% at 50% 40%, #000 25%, transparent 80%);
+  }
+  /* Deck engine */
+  .deck { position: fixed; inset: 0; z-index: 1; }
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 92px 32px 108px;
+    opacity: 0; visibility: hidden;
+    transform: translateY(14px);
+    transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1), visibility 0.5s;
+    overflow-y: auto;
+  }
+  .slide.active { opacity: 1; visibility: visible; transform: none; }
+  .slide.prev { transform: translateY(-14px); }
+  .slide-inner { width: 100%; max-width: var(--maxw); margin: auto; }
 
-  /* Masthead */
-  header.hero {
-    padding: 88px 0 56px;
-    border-bottom: 1px solid var(--line);
+  /* staggered entrance of children on the active slide */
+  .slide .st { opacity: 0; transform: translateY(20px); }
+  .slide.active .st {
+    animation: stIn 0.66s cubic-bezier(0.16,1,0.3,1) forwards;
   }
+  .slide.active .st:nth-child(1) { animation-delay: 0.10s; }
+  .slide.active .st:nth-child(2) { animation-delay: 0.19s; }
+  .slide.active .st:nth-child(3) { animation-delay: 0.28s; }
+  .slide.active .st:nth-child(4) { animation-delay: 0.37s; }
+  .slide.active .st:nth-child(5) { animation-delay: 0.46s; }
+  .slide.active .st:nth-child(6) { animation-delay: 0.55s; }
+  @keyframes stIn { to { opacity: 1; transform: none; } }
+
+  /* Top progress */
+  .progress {
+    position: fixed; top: 0; left: 0; height: 2px; width: 0%; z-index: 60;
+    background: linear-gradient(90deg, var(--accent-deep), var(--accent));
+    box-shadow: 0 0 12px var(--glow);
+    transition: width 0.5s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  /* Top-right meta */
+  .deck-brand {
+    position: fixed; top: 22px; left: 32px; z-index: 60;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--ink-faint);
+  }
+  .deck-brand b { color: var(--accent); font-weight: 600; }
+
+  /* Bottom controls */
+  .controls {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    display: flex; align-items: center; justify-content: center; gap: 18px;
+    padding: 20px 32px 26px;
+  }
+  .controls button {
+    background: var(--surface); color: var(--ink-soft);
+    border: 1px solid var(--line-strong); border-radius: 999px;
+    width: 40px; height: 40px; font-size: 17px; cursor: pointer;
+    display: grid; place-items: center;
+    transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.15s;
+  }
+  .controls button:hover { color: var(--ink); border-color: var(--accent); background: var(--accent-soft); }
+  .controls button:active { transform: scale(0.92); }
+  .controls button:disabled { opacity: 0.3; cursor: default; }
+  .dots { display: flex; gap: 9px; align-items: center; }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%; cursor: pointer;
+    background: var(--line-strong); border: 0; padding: 0;
+    transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+  }
+  .dot.active { background: var(--accent); transform: scale(1.35); box-shadow: 0 0 10px var(--glow); }
+  .dot:hover { background: var(--ink-faint); }
+  .counter {
+    font-family: var(--mono); font-size: 12px; color: var(--ink-faint);
+    letter-spacing: 0.08em; min-width: 52px; text-align: center;
+  }
+  .counter b { color: var(--ink); }
+  .hint-keys {
+    position: fixed; right: 32px; bottom: 26px; z-index: 60;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em;
+    color: var(--ink-faint); opacity: 0.7;
+  }
+  @media (max-width: 640px) {
+    .hint-keys { display: none; }
+    .deck-brand { left: 22px; font-size: 11px; }
+    .slide { padding: 80px 20px 100px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .slide, .slide .st { transition: opacity 0.2s; animation: none !important; opacity: 1; transform: none; }
+    .slide:not(.active) { opacity: 0; }
+  }
+  /* Shared content */
   .kicker {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 20px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 26px;
+    display: inline-flex; align-items: center; gap: 10px;
   }
+  .kicker::before { content: ""; width: 26px; height: 1px; background: var(--accent); opacity: 0.7; }
   h1 {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(40px, 8vw, 64px);
-    line-height: 1.02;
-    letter-spacing: -0.02em;
-    margin: 0 0 22px;
-  }
-  .lede {
-    font-size: clamp(18px, 2.4vw, 21px);
-    line-height: 1.55;
-    color: var(--ink-soft);
-    max-width: 33em;
-    margin: 0;
-  }
-  .lede em { color: var(--ink); font-style: normal; font-weight: 600; }
-
-  /* Sections */
-  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
-  section:last-of-type { border-bottom: 0; }
-  .sec-num {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    color: var(--ink-faint);
-    margin: 0 0 12px;
-  }
-  h2 {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(26px, 4.5vw, 34px);
-    line-height: 1.15;
-    letter-spacing: -0.015em;
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(72px, 13vw, 150px); line-height: 0.9; letter-spacing: -0.035em;
     margin: 0 0 28px;
+    background: linear-gradient(180deg, var(--ink) 30%, #cbb89a 130%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 60px rgba(240,164,92,0.12);
   }
-  h3 {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    margin: 0 0 14px;
+  .lede { font-size: clamp(19px, 2.4vw, 24px); line-height: 1.5; color: var(--ink-soft); max-width: 30em; margin: 0; font-weight: 350; }
+  .lede em { color: var(--accent); font-style: italic; font-weight: 400; }
+
+  .sec-head { display: flex; align-items: baseline; gap: 22px; margin: 0 0 34px; }
+  .sec-num {
+    font-family: var(--mono); font-size: clamp(40px, 7vw, 72px); font-weight: 500; line-height: 1;
+    color: transparent; -webkit-text-stroke: 1px var(--line-strong); flex-shrink: 0;
   }
-  p { margin: 0 0 18px; }
-  p:last-child { margin-bottom: 0; }
-  strong { font-weight: 650; color: var(--ink); }
+  .sec-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(32px, 5.2vw, 52px); line-height: 1.06; letter-spacing: -0.02em; margin: 0; }
+  .body-lg { font-size: clamp(17px, 2.2vw, 21px); line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  p { margin: 0 0 18px; } p:last-child { margin-bottom: 0; }
+  strong { font-weight: 600; color: var(--ink); }
   .soft { color: var(--ink-soft); }
+  em { color: var(--ink); font-style: italic; }
 
-  /* Pull-quote / one-liner */
   blockquote {
-    margin: 28px 0;
-    padding: 22px 26px;
-    background: var(--surface);
-    border-left: 3px solid var(--accent);
+    margin: 0; padding: 34px 40px;
+    background: linear-gradient(135deg, var(--surface), var(--bg-2));
+    border: 1px solid var(--line); border-left: 3px solid var(--accent);
     border-radius: 0 var(--radius) var(--radius) 0;
-    font-family: var(--serif);
-    font-size: 20px;
-    line-height: 1.45;
-    color: var(--ink);
+    font-family: var(--serif); font-size: clamp(24px, 3.4vw, 38px); line-height: 1.32; color: var(--ink);
+    position: relative; overflow: hidden;
   }
+  blockquote::before { content: "\201C"; position: absolute; top: -18px; right: 22px; font-family: var(--serif); font-size: 140px; color: var(--accent); opacity: 0.10; line-height: 1; }
 
-  /* "Is not" list */
-  ul.plain { list-style: none; margin: 22px 0 0; padding: 0; }
-  ul.plain li {
-    position: relative;
-    padding: 0 0 0 26px;
-    margin: 0 0 12px;
-    color: var(--ink-soft);
-  }
-  ul.plain li::before {
-    content: "—";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-  }
+  ul.plain { list-style: none; margin: 0; padding: 0; }
+  ul.plain li { position: relative; padding: 16px 0 16px 36px; color: var(--ink-soft); border-top: 1px solid var(--line); font-size: clamp(16px, 2vw, 19px); }
+  ul.plain li:last-child { border-bottom: 1px solid var(--line); }
+  ul.plain li::before { content: "\00d7"; position: absolute; left: 6px; top: 15px; color: var(--accent); font-size: 20px; font-weight: 600; }
   ul.plain li strong { color: var(--ink); }
 
-  /* Comparison cards */
-  .compare { margin: 26px 0; }
-  .compare + .compare { margin-top: 20px; }
-  .compare-title {
-    font-family: var(--serif);
-    font-size: 19px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    margin: 0 0 16px;
+  /* Compare — big single card per slide */
+  .compare-title { font-family: var(--serif); font-size: clamp(24px, 3.4vw, 38px); font-weight: 600; letter-spacing: -0.015em; margin: 0 0 22px; display: flex; align-items: center; gap: 14px; }
+  .compare-title .idx { font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--accent); border: 1px solid var(--line-strong); border-radius: 7px; padding: 4px 10px; }
+  .reveal-card {
+    border-radius: var(--radius); border: 1px solid var(--line);
+    background: linear-gradient(150deg, var(--surface), var(--bg-2));
+    overflow: hidden; cursor: pointer; position: relative;
+    transition: border-color 0.3s, box-shadow 0.3s;
   }
-  .rows { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .cell {
-    border-radius: var(--radius);
-    padding: 18px 20px;
-    font-size: 15.5px;
-    line-height: 1.55;
+  .reveal-card.open { border-color: var(--line-strong); box-shadow: 0 24px 60px -28px rgba(0,0,0,0.75); }
+  .reveal-card .face { padding: 30px 34px; }
+  .reveal-card .tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 14px; font-weight: 500; }
+  .reveal-card .tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; }
+  .reveal-card .without-face .tag { color: var(--without); }
+  .reveal-card .without-face .tag::before { background: var(--without); box-shadow: 0 0 8px var(--without); }
+  .reveal-card .face p { margin: 0; color: var(--ink-soft); font-size: clamp(16px, 2.1vw, 20px); line-height: 1.5; }
+  .reveal-card .face p em { color: var(--ink); font-style: italic; }
+  .reveal-card .with-face {
+    border-top: 1px solid var(--line);
+    background: linear-gradient(150deg, var(--with-soft), transparent);
+    display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.5s cubic-bezier(0.16,1,0.3,1);
   }
-  .cell .tag {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin: 0 0 10px;
-  }
-  .cell.without { background: var(--without-bg); }
-  .cell.without .tag { color: var(--accent); }
-  .cell.with { background: var(--with-bg); border: 1px solid var(--with-line); }
-  .cell.with .tag { color: #4a7040; }
-  @media (prefers-color-scheme: dark) { .cell.with .tag { color: #8fbf80; } }
-  .cell p { margin: 0; color: var(--ink-soft); }
+  .reveal-card.open .with-face { grid-template-rows: 1fr; }
+  .reveal-card .with-face > div { overflow: hidden; }
+  .reveal-card .with-face .inner { padding: 30px 34px; }
+  .reveal-card .with-face .tag { color: var(--with); }
+  .reveal-card .with-face .tag::before { background: var(--with); box-shadow: 0 0 8px var(--with); }
+  .reveal-hint { position: absolute; top: 26px; right: 28px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); display: inline-flex; align-items: center; gap: 7px; transition: opacity 0.3s; }
+  .reveal-card.open .reveal-hint { opacity: 0; }
 
-  /* Synthesis line */
   .synthesis {
-    margin-top: 28px;
-    padding: 22px 24px;
-    border: 1px dashed var(--line-strong);
-    border-radius: var(--radius);
-    font-size: 16px;
-    color: var(--ink-soft);
+    padding: 34px 38px; border: 1px solid var(--line-strong); border-radius: var(--radius);
+    background: radial-gradient(600px 200px at 100% 0%, rgba(240,164,92,0.06), transparent), var(--surface);
+    font-size: clamp(18px, 2.4vw, 24px); color: var(--ink-soft); line-height: 1.5; font-family: var(--serif);
   }
-  .synthesis strong { color: var(--ink); }
+  .synthesis strong { color: var(--accent); font-weight: 600; }
+  .synthesis em { color: var(--ink); font-style: italic; }
 
-  /* Build aspects */
-  .aspect { padding: 24px 0; border-top: 1px solid var(--line); }
-  .aspect:first-of-type { border-top: 0; padding-top: 4px; }
-  .aspect h3 {
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    margin: 0 0 10px;
-  }
-  .aspect p { color: var(--ink-soft); font-size: 15.5px; }
-  .aspect .layers {
-    list-style: none; margin: 0 0 14px; padding: 0;
-    display: flex; flex-direction: column; gap: 8px;
-  }
-  .aspect .layers li {
-    font-size: 15px; color: var(--ink-soft);
-    padding-left: 18px; position: relative;
-  }
-  .aspect .layers li::before {
-    content: ""; position: absolute; left: 0; top: 0.62em;
-    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
-  }
-  .aspect .layers li b { color: var(--ink); font-weight: 650; }
+  .aspect-num { font-family: var(--mono); font-size: 13px; color: var(--accent); margin: 0 0 14px; letter-spacing: 0.1em; }
+  .aspect h3 { font-family: var(--serif); font-size: clamp(28px, 4vw, 44px); font-weight: 600; letter-spacing: -0.02em; margin: 0 0 20px; color: var(--ink); line-height: 1.05; }
+  .aspect .body-lg + .body-lg { margin-top: 16px; }
+  .layers { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .layers li { font-size: clamp(16px, 2vw, 19px); color: var(--ink-soft); padding-left: 22px; position: relative; }
+  .layers li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--glow); }
+  .layers li b { color: var(--ink); font-weight: 600; }
 
-  /* Takeaway */
-  .takeaway {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    padding: 36px 32px;
-    margin-top: 8px;
-  }
-  .takeaway h2 { margin-bottom: 16px; }
-  .takeaway p { font-size: 17.5px; color: var(--ink-soft); }
-  .takeaway p strong { color: var(--ink); }
+  .takeaway .sec-label { margin-bottom: 16px; }
+  .takeaway h2 { margin-bottom: 24px; }
+  .takeaway .body-lg { font-size: clamp(19px, 2.6vw, 26px); font-family: var(--serif); line-height: 1.4; color: var(--ink); }
+  .takeaway .body-lg strong { color: var(--accent); }
 
-  footer {
-    padding: 40px 0 72px;
-    color: var(--ink-faint);
-    font-size: 13px;
-    font-family: var(--mono);
-    letter-spacing: 0.04em;
-  }
-
-  @media (max-width: 560px) {
-    header.hero { padding: 56px 0 40px; }
-    section { padding: 44px 0; }
-    .rows { grid-template-columns: 1fr; }
-  }
+  .pager { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 26px; }
+  .pager b { color: var(--accent); }
 </style>
 </head>
 <body>
+<div class="progress" id="progress"></div>
+<div class="deck-brand"><b>Astra</b> · deck</div>
 
-<header class="hero">
-  <div class="wrap">
-    <p class="kicker">A local base for design-support work</p>
-    <h1>Astra</h1>
-    <p class="lede">A short, self-contained explainer. Not an install guide, not a product
-    pitch — it answers three things: <em>what this is</em>, <em>what it changes in
-    practice</em>, and if you want your own, <em>which aspects actually matter</em>.</p>
-  </div>
-</header>
+<div class="deck" id="deck">
 
-<section>
-  <div class="wrap">
-    <p class="sec-num">01 — WHAT IT IS</p>
-    <h2>A foundation an agent loads before it works</h2>
-    <p>Instead of re-explaining your rules, your preferred component names, and your working
-    style every session, you keep them in one place the agent reads first. It is a base of
-    <strong>rules, structure, language, and decision logic</strong> — the things you reuse
-    across every project — so different tools and different sessions all start from the same
-    ground.</p>
-    <blockquote>A local operating base for design-support work, designed to keep repeated
-    thinking consistent across tools, projects, and sessions.</blockquote>
-    <ul class="plain">
-      <li><strong>Not</strong> a feature product, and not something end-users touch.</li>
-      <li><strong>Not</strong> a knowledge dump — content earns its place only if it's reusable across projects.</li>
-      <li><strong>Not</strong> a homepage or a showcase. It is infrastructure, loaded silently before work.</li>
-    </ul>
-  </div>
-</section>
+  <section class="slide" data-title="Cover">
+    <div class="slide-inner">
+      <p class="kicker st">A local base for design-support work</p>
+      <h1 class="st">Astra</h1>
+      <p class="lede st">A short, self-contained explainer. Not an install guide, not a product
+      pitch — it answers three things: <em>what this is</em>, <em>what it changes in
+      practice</em>, and if you want your own, <em>which aspects actually matter</em>.</p>
+      <p class="pager st">Use <b>→</b> / space / click to advance</p>
+    </div>
+  </section>
 
-<section>
-  <div class="wrap">
-    <p class="sec-num">02 — WHAT IT CAN DO</p>
-    <h2>Value where ambiguity, precision, and repetition live</h2>
-    <p class="soft">Astra is not free value on every task. For a small, unambiguous, one-off
-    request it adds little. It shows up in three situations — and the <em>without</em> side
-    below isn't a strawman, it's how a capable agent actually behaves by default.</p>
+  <section class="slide" data-title="What it is">
+    <div class="slide-inner">
+      <div class="sec-head st">
+        <span class="sec-num">01</span>
+        <div><p class="sec-label">What it is</p><h2>A foundation an agent loads before it works</h2></div>
+      </div>
+      <p class="body-lg st">Instead of re-explaining your rules, your preferred component names, and your
+      working style every session, you keep them in one place the agent reads first. It is a base of
+      <strong>rules, structure, language, and decision logic</strong> — the things you reuse across
+      every project — so different tools and sessions all start from the same ground.</p>
+      <div class="st" style="margin-top:32px"><blockquote>A local operating base for design-support
+      work, designed to keep repeated thinking consistent across tools, projects, and sessions.</blockquote></div>
+    </div>
+  </section>
 
-    <div class="compare">
-      <p class="compare-title">Ambiguous — “redesign the settings page”</p>
-      <div class="rows">
-        <div class="cell without">
+  <section class="slide" data-title="What it is not">
+    <div class="slide-inner">
+      <p class="sec-label st">01 — What it is</p>
+      <h2 class="st" style="margin-bottom:30px">What it is <em>not</em></h2>
+      <ul class="plain st">
+        <li><strong>Not</strong> a feature product, and not something end-users touch.</li>
+        <li><strong>Not</strong> a knowledge dump — content earns its place only if it's reusable across projects.</li>
+        <li><strong>Not</strong> a homepage or a showcase. It is infrastructure, loaded silently before work.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide" data-title="What it changes">
+    <div class="slide-inner">
+      <div class="sec-head st">
+        <span class="sec-num">02</span>
+        <div><p class="sec-label">What it changes</p><h2>Value where ambiguity, precision, and repetition live</h2></div>
+      </div>
+      <p class="body-lg st">Astra is not free value on every task. For a small, unambiguous, one-off
+      request it adds little. It shows up in three situations — and the <em>without</em> side isn't a
+      strawman, it's how a capable agent actually behaves by default.</p>
+      <p class="pager st"><b>Next three slides:</b> click each card to reveal the difference.</p>
+    </div>
+  </section>
+  <section class="slide" data-title="Ambiguous">
+    <div class="slide-inner">
+      <p class="compare-title st"><span class="idx">A</span> Ambiguous — “redesign the settings page”</p>
+      <div class="reveal-card st">
+        <span class="reveal-hint">Click to reveal <span class="arw">↓</span></span>
+        <div class="face without-face">
           <span class="tag">Without</span>
-          <p>Starts building immediately, guesses the goal, and you find out halfway it
-          solved the wrong problem — the real issue was <em>findability</em>, not looks.</p>
+          <p>Starts building immediately, guesses the goal, and you find out halfway it solved the
+          wrong problem — the real issue was <em>findability</em>, not looks.</p>
         </div>
-        <div class="cell with">
+        <div class="with-face"><div><div class="inner">
           <span class="tag">With</span>
-          <p>Frames before building. Goal unclear? A short exploratory pass turns “redesign”
-          into “make settings findable”, then works toward that.</p>
-        </div>
+          <p>Frames before building. Goal unclear? A short exploratory pass turns “redesign” into
+          “make settings findable”, then works toward that.</p>
+        </div></div></div>
       </div>
     </div>
+  </section>
 
-    <div class="compare">
-      <p class="compare-title">Precision — “add a dropdown filter”</p>
-      <div class="rows">
-        <div class="cell without">
+  <section class="slide" data-title="Precision">
+    <div class="slide-inner">
+      <p class="compare-title st"><span class="idx">B</span> Precision — “add a dropdown filter”</p>
+      <div class="reveal-card st">
+        <span class="reveal-hint">Click to reveal <span class="arw">↓</span></span>
+        <div class="face without-face">
           <span class="tag">Without</span>
-          <p>“Dropdown” is ambiguous, so it picks one. If you meant a searchable typeahead,
-          you learn that after it's built.</p>
+          <p>“Dropdown” is ambiguous, so it picks one. If you meant a searchable typeahead, you learn
+          that after it's built.</p>
         </div>
-        <div class="cell with">
+        <div class="with-face"><div><div class="inner">
           <span class="tag">With</span>
-          <p>Distinguishes <em>Combobox</em> vs <em>Dropdown Menu</em> vs <em>Popover</em>,
-          confirms which you mean, then builds. A standard name removes a round-trip.</p>
-        </div>
+          <p>Distinguishes <em>Combobox</em> vs <em>Dropdown Menu</em> vs <em>Popover</em>, confirms
+          which you mean, then builds. A standard name removes a round-trip.</p>
+        </div></div></div>
       </div>
     </div>
+  </section>
 
-    <div class="compare">
-      <p class="compare-title">Repetition — the same lesson, second time</p>
-      <div class="rows">
-        <div class="cell without">
+  <section class="slide" data-title="Repetition">
+    <div class="slide-inner">
+      <p class="compare-title st"><span class="idx">C</span> Repetition — the same lesson, second time</p>
+      <div class="reveal-card st">
+        <span class="reveal-hint">Click to reveal <span class="arw">↓</span></span>
+        <div class="face without-face">
           <span class="tag">Without</span>
           <p>A preference you set last week is gone next session; you re-explain it.</p>
         </div>
-        <div class="cell with">
+        <div class="with-face"><div><div class="inner">
           <span class="tag">With</span>
-          <p>The lesson was captured once and loads every session. Knowledge compounds
-          instead of resetting.</p>
-        </div>
+          <p>The lesson was captured once and loads every session. Knowledge compounds instead of
+          resetting.</p>
+        </div></div></div>
       </div>
     </div>
+  </section>
 
-    <div class="synthesis">
-      <strong>The pattern:</strong> without a foundation, each task starts from zero and each
-      word is taken at face value; with one, tasks start framed, words are made precise, and
-      lessons persist. The return scales with ambiguity, precision-sensitivity, and
-      repetition — and is near-zero without them. Use it where it pays.
+  <section class="slide" data-title="The pattern">
+    <div class="slide-inner">
+      <p class="sec-label st">02 — What it changes</p>
+      <h2 class="st" style="margin-bottom:28px">The pattern</h2>
+      <div class="synthesis st">Without a foundation, each task starts from zero and each word is taken
+      at face value; with one, tasks start framed, words are made precise, and lessons persist. The
+      return scales with <strong>ambiguity, precision-sensitivity, and repetition</strong> — and is
+      near-zero without them. <em>Use it where it pays.</em></div>
     </div>
-  </div>
-</section>
+  </section>
+  <section class="slide" data-title="Build your own">
+    <div class="slide-inner">
+      <div class="sec-head st">
+        <span class="sec-num">03</span>
+        <div><p class="sec-label">Build your own</p><h2>You don't need this repo — you need these decisions</h2></div>
+      </div>
+      <p class="body-lg st">If the idea fits how you work, build your own. The specific files matter far
+      less than the five aspects next.</p>
+    </div>
+  </section>
 
-<section>
-  <div class="wrap">
-    <p class="sec-num">03 — HOW TO BUILD YOUR OWN</p>
-    <h2>You don't need this repo — you need these decisions</h2>
-    <p class="soft">If the idea fits how you work, build your own. The specific files matter
-    far less than the aspects below.</p>
-
-    <div class="aspect">
-      <h3>Layer by stability, not by topic</h3>
-      <ul class="layers">
+  <section class="slide" data-title="Aspect 1">
+    <div class="slide-inner aspect">
+      <p class="aspect-num st">Aspect 01 / 05</p>
+      <h3 class="st">Layer by stability, not by topic</h3>
+      <ul class="layers st">
         <li><b>Stable</b> — what the base <em>is</em> and how it's used. Changes rarely and deliberately.</li>
         <li><b>Evolving</b> — recurring patterns and validated lessons. Updated after tasks.</li>
         <li><b>Working</b> — task-scoped drafts. Rewritten freely, never permanent.</li>
       </ul>
-      <p>Daily churn should never destabilize your core rules. One undifferentiated pile
-      either goes stale or becomes too risky to touch.</p>
+      <p class="body-lg st">Daily churn should never destabilize your core rules. One undifferentiated
+      pile either goes stale or becomes too risky to touch.</p>
     </div>
+  </section>
 
-    <div class="aspect">
-      <h3>Make methods the hook, keep data on demand</h3>
-      <p>Load the <em>method</em> every session; load the <em>data</em> only when needed. A
-      rule like “name UI elements with their standard component names” is small and always
-      worth loading — the 62-entry lookup table it points to is not. Separating the trigger
-      from the payload is what keeps the base from bloating.</p>
+  <section class="slide" data-title="Aspect 2">
+    <div class="slide-inner aspect">
+      <p class="aspect-num st">Aspect 02 / 05</p>
+      <h3 class="st">Make methods the hook, keep data on demand</h3>
+      <p class="body-lg st">Load the <em>method</em> every session; load the <em>data</em> only when
+      needed. A rule like “name UI elements with their standard component names” is small and always
+      worth loading — the 62-entry lookup table it points to is not. Separating the trigger from the
+      payload is what keeps the base from bloating.</p>
     </div>
+  </section>
 
-    <div class="aspect">
-      <h3>Capture only what's reusable — and deliberately</h3>
-      <p>The failure mode of any knowledge base is the junk drawer. Two guards: a
-      <strong>reusability bar</strong> (if a lesson only helps one task, it dies in the
-      working layer) and <strong>confirm before writing</strong> (propose what to capture,
-      write only after a human agrees). Silence is the correct default.</p>
+  <section class="slide" data-title="Aspect 3">
+    <div class="slide-inner aspect">
+      <p class="aspect-num st">Aspect 03 / 05</p>
+      <h3 class="st">Capture only what's reusable — and deliberately</h3>
+      <p class="body-lg st">The failure mode of any knowledge base is the junk drawer. Two guards: a
+      <strong>reusability bar</strong> (if a lesson only helps one task, it dies in the working layer)
+      and <strong>confirm before writing</strong> (propose what to capture, write only after a human
+      agrees). Silence is the correct default.</p>
     </div>
+  </section>
 
-    <div class="aspect">
-      <h3>One source of truth, synced — not copied</h3>
-      <p>Keep the canonical copy in one place; machines read a local copy and updates flow
-      through sync. The moment the same rule exists in two hand-copied places, they drift and
-      you can't trust either.</p>
+  <section class="slide" data-title="Aspect 4">
+    <div class="slide-inner aspect">
+      <p class="aspect-num st">Aspect 04 / 05</p>
+      <h3 class="st">One source of truth, synced — not copied</h3>
+      <p class="body-lg st">Keep the canonical copy in one place; machines read a local copy and updates
+      flow through sync. The moment the same rule exists in two hand-copied places, they drift and you
+      can't trust either.</p>
     </div>
+  </section>
 
-    <div class="aspect">
-      <h3>Pick one working language and stay in it</h3>
-      <p>Its whole job is to keep wording stable so behavior is stable. Mixed or drifting
-      vocabulary quietly reintroduces the ambiguity the base exists to remove.</p>
+  <section class="slide" data-title="Aspect 5">
+    <div class="slide-inner aspect">
+      <p class="aspect-num st">Aspect 05 / 05</p>
+      <h3 class="st">Pick one working language and stay in it</h3>
+      <p class="body-lg st">Its whole job is to keep wording stable so behavior is stable. Mixed or
+      drifting vocabulary quietly reintroduces the ambiguity the base exists to remove.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="takeaway">
-      <h2>The takeaway</h2>
-      <p>The value isn't the content — it's the <strong>discipline</strong>: layer by
-      stability, hook methods to data, capture deliberately, sync from one source. Get those
-      right and the foundation stays small, trustworthy, and genuinely reusable. Get them
-      wrong and you've built another folder of documents nobody loads.</p>
+  <section class="slide" data-title="Takeaway">
+    <div class="slide-inner takeaway">
+      <p class="sec-label st">The takeaway</p>
+      <h2 class="st">Discipline, not content</h2>
+      <p class="body-lg st">The value isn't the content — it's the <strong>discipline</strong>: layer by
+      stability, hook methods to data, capture deliberately, sync from one source. Get those right and
+      the foundation stays small, trustworthy, and genuinely reusable. Get them wrong and you've built
+      another folder of documents nobody loads.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <div class="wrap">Astra · a local operating base for design-support work</div>
-</footer>
+</div>
 
+<div class="controls">
+  <button id="prev" aria-label="Previous">‹</button>
+  <div class="dots" id="dots"></div>
+  <span class="counter" id="counter"><b>1</b> / 15</span>
+  <button id="next" aria-label="Next">›</button>
+</div>
+<div class="hint-keys">← → · space · F fullscreen</div>
+
+<script>
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var i = 0;
+  var progress = document.getElementById('progress');
+  var counter = document.getElementById('counter');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var dotsWrap = document.getElementById('dots');
+
+  // build dots
+  slides.forEach(function(s, idx) {
+    var d = document.createElement('button');
+    d.className = 'dot'; d.title = s.getAttribute('data-title') || ('Slide ' + (idx+1));
+    d.addEventListener('click', function(e) { e.stopPropagation(); go(idx); });
+    dotsWrap.appendChild(d);
+  });
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function render() {
+    slides.forEach(function(s, idx) {
+      s.classList.remove('active', 'prev');
+      if (idx === i) s.classList.add('active');
+      else if (idx < i) s.classList.add('prev');
+    });
+    dots.forEach(function(d, idx) { d.classList.toggle('active', idx === i); });
+    counter.innerHTML = '<b>' + (i+1) + '</b> / ' + total;
+    progress.style.width = (total > 1 ? (i/(total-1))*100 : 100) + '%';
+    prevBtn.disabled = (i === 0);
+    nextBtn.disabled = (i === total-1);
+  }
+  function go(n) { i = Math.max(0, Math.min(total-1, n)); render(); }
+  function next() { if (i < total-1) go(i+1); }
+  function prev() { if (i > 0) go(i-1); }
+
+  prevBtn.addEventListener('click', function(e){ e.stopPropagation(); prev(); });
+  nextBtn.addEventListener('click', function(e){ e.stopPropagation(); next(); });
+
+  // reveal cards — toggle, don't advance
+  document.querySelectorAll('.reveal-card').forEach(function(card){
+    card.addEventListener('click', function(e){ e.stopPropagation(); card.classList.toggle('open'); });
+  });
+
+  // click screen to advance (right half = next, left third = prev)
+  document.getElementById('deck').addEventListener('click', function(e){
+    var x = e.clientX / window.innerWidth;
+    if (x < 0.33) prev(); else next();
+  });
+
+  // keyboard
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') { e.preventDefault(); go(0); }
+    else if (e.key === 'End') { e.preventDefault(); go(total-1); }
+    else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
+      else { document.exitFullscreen && document.exitFullscreen(); }
+    }
+  });
+
+  // basic swipe
+  var tx = 0;
+  document.addEventListener('touchstart', function(e){ tx = e.changedTouches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 55) { if (dx < 0) next(); else prev(); }
+  }, {passive:true});
+
+  render();
+</script>
 </body>
 </html>
