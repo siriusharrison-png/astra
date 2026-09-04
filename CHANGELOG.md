@@ -6,6 +6,27 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-09-04
+
+- [patterns] Convergence update
+  - source: write-prd skill Step 4
+  - action: patterns.md 新增 pattern + README Quick Navigation 加行
+  - summary: 新增 Verifiable Specification Pattern：写不出验收条件即笼统，四问转化+触发词黑名单；单一来源与结构去重不重复收入，已由 Cross-Artifact Consistency 覆盖
+
+### 2026-09-02
+
+- [evolving] Convergence update
+  - source: jiekou-home design-token migration
+  - file: patterns.md
+  - summary: Off-Spec Value Triage Pattern: added the 'use' face — token systems are layered, so using them is a three-tier fallback (semantic first → fact layer when semantics don't cover → literal only when no step fits, and that signals a scale gap → log as D). Semantic is the basic usage not the only one; use and triage (A/B/C/D) are two faces of one layered system.
+
+### 2026-09-02
+
+- [evolving] Convergence update
+  - source: jiekou-home design-token migration
+  - file: patterns.md
+  - summary: Off-Spec Value Triage Pattern (A/B/C/D): retrofitting a token spec onto existing code — exceeding a token ≠ violation; classify off-spec values as Converge/Exception/Delete/Defer; scale-derived thresholds as sieve; ground the count in a real scan with caveats; design defines rules, engineering executes; land as runtime/work/spec artifacts.
+
 ### 2026-08-25
 
 - [pattern] Convergence update
