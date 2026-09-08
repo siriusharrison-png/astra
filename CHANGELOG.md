@@ -6,6 +6,11 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-09-08
+
+- [evolving] Convergence update
+  - summary: add Design Deliverable Completeness Pattern (设计产出完整性): view/error/feedback state set + persist-until-confirmed acceptance rule
+
 ### 2026-09-04
 
 - [patterns] Convergence update
