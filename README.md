@@ -323,25 +323,22 @@ Good contents:
 - `principles.md`: long-lived principles
 - `standards.md`: stable conventions and rules
 - `patterns.md`: reusable thought and output patterns
-- `maps/`: reusable process maps and experience models
-- `maps/reference-analysis.md`: how to analyze live references and extract reusable patterns
 - `workflow.md`: task flow and convergence trigger rules
 - `application.md`: how to apply analysis output to the target project
 - `memory.md`: evolving cross-project knowledge
 - `convergence.md`: rules for turning task discussion into reusable updates
-- `templates.md`: structured templates for specs and reviews
 - `convergence-template.md`: copyable end-of-task convergence format
-- `templates/journey-map-template.md`: copyable user journey map format
-- `templates/reference-analysis-template.md`: copyable reference analysis format
-- `maps/task-flow-map.md`: task flow map structure
-- `maps/decision-flow-map.md`: decision flow map structure
-- `maps/role-map.md`: role map structure
-- `maps/state-map.md`: state map structure
+- `templates.md`: structured templates for specs and reviews
 - `CHANGELOG.md`: append-only record of reusable updates
-- `scripts/sync.sh`: fetch and pull the latest repo version
-- `scripts/converge.sh`: append convergence records to the changelog
-- `scripts/bootstrap.sh`: clone or sync a local Astra copy
+- `QUICKSTART.md`: copy-paste prompts, decision trees, and templates for use in other projects
+- `SHARE.md` / `SHARE.html`: project-neutral explainer of what Astra is and how to build your own
 - `INSTALL.md`: installation and agent connection guide
+- `protocols/`: decision frameworks — path selection, handoff, reference analysis
+- `maps/`: reusable process maps (task flow, decision flow, role, state, user journey)
+- `references/`: lookup data such as `ui-naming-dictionary.md`
+- `templates/`: copyable formats (design-system spec, journey map, reference analysis)
+- `skills/`: agent-loadable skills (`skills/astra/SKILL.md` — fast Astra guidance)
+- `scripts/`: `sync.sh`, `astra-sync.sh`, `converge.sh`, `bootstrap.sh`, `install.sh`
 - `specs/`: task drafts and active working docs
 - `archive/`: completed or deprecated material
 

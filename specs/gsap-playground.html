@@ -1,0 +1,614 @@
+<title>Motion Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<style>
+  :root {
+    --bg: #F5F3EE;
+    --surface: #FFFFFF;
+    --surface-2: #EDE9E1;
+    --ink: #1B1C28;
+    --muted: #6B6C7A;
+    --line: #DED9CF;
+    --accent: #DD513B;
+    --accent-soft: #F6E0D9;
+    --accent-2: #1F9B8A;
+    --shadow: 0 1px 2px rgba(27,28,40,.04), 0 8px 24px rgba(27,28,40,.06);
+
+    --font-display: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      color-scheme: dark;
+      --bg: #12131C;
+      --surface: #1B1D2A;
+      --surface-2: #242739;
+      --ink: #ECEAE2;
+      --muted: #9A9CB0;
+      --line: #2E3145;
+      --accent: #FF6A4D;
+      --accent-soft: #2C2130;
+      --accent-2: #35C4AE;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #12131C;
+    --surface: #1B1D2A;
+    --surface-2: #242739;
+    --ink: #ECEAE2;
+    --muted: #9A9CB0;
+    --line: #2E3145;
+    --accent: #FF6A4D;
+    --accent-soft: #2C2130;
+    --accent-2: #35C4AE;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 40px 64px;
+  }
+
+  /* ---- header ---- */
+  header { margin-bottom: 28px; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(38px, 7vw, 68px);
+    line-height: .98;
+    letter-spacing: -.02em;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  h1 .lit { color: var(--accent); }
+  .lede {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    align-items: center;
+    margin-top: 22px;
+  }
+  .btn {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--surface);
+    background: var(--ink);
+    border: none;
+    border-radius: 999px;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: transform .18s ease, opacity .18s ease;
+  }
+  .btn:hover { opacity: .88; }
+  .btn:active { transform: scale(.97); }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .toggle {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 14px;
+    cursor: pointer;
+  }
+  .toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .rm-note {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--ink);
+    background: var(--accent-soft);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-top: 18px;
+  }
+
+  /* ---- grid ---- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+    margin-top: 32px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .card-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -.01em;
+    margin: 0;
+  }
+  .card-desc { font-size: 13.5px; color: var(--muted); margin: -6px 0 0; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 3px 7px;
+  }
+  .tag.ac { color: var(--accent-2); border-color: color-mix(in srgb, var(--accent-2) 40%, var(--line)); }
+
+  /* ---- stage ---- */
+  .stage {
+    position: relative;
+    height: 128px;
+    background: var(--surface-2);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .obj {
+    width: 68px; height: 68px;
+    border-radius: 14px;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 22px;
+  }
+  .panel {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 18px;
+  }
+  .dot { width: 20px; height: 44px; border-radius: 6px; background: var(--accent-2); }
+  .badge {
+    padding: 8px 16px; border-radius: 999px;
+    background: var(--accent); color: #fff;
+    font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+  }
+  .num {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 46px; letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  .chip {
+    padding: 8px 14px; border-radius: 10px;
+    background: var(--surface); border: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 12.5px;
+  }
+  .lift {
+    padding: 12px 22px; border-radius: 12px;
+    background: var(--ink); color: var(--surface);
+    font-family: var(--font-body); font-weight: 600; font-size: 14px;
+    cursor: pointer; border: none;
+    box-shadow: 0 6px 16px rgba(0,0,0,.12);
+  }
+
+  .card-foot { display: flex; align-items: center; gap: 10px; }
+  .play {
+    font-family: var(--font-body); font-size: 13px; font-weight: 600;
+    color: var(--accent); background: var(--accent-soft);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+    border-radius: 9px; padding: 8px 16px; cursor: pointer;
+    transition: transform .15s ease;
+  }
+  .play:hover { transform: translateY(-1px); }
+  .play:active { transform: translateY(0) scale(.97); }
+  .play:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .hint { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
+
+  pre {
+    margin: 0;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  pre .k { color: var(--accent-2); }
+  pre .s { color: var(--accent); }
+
+  /* ---- scroll section ---- */
+  .scroll-sec {
+    margin-top: 64px;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .scroll-sec h2 {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 26px; letter-spacing: -.01em; margin: 0 0 6px;
+  }
+  .scroll-sec p { color: var(--muted); margin: 0 0 20px; font-size: 14px; }
+  .track {
+    position: relative;
+    height: 340px;
+    border-radius: 14px;
+    background: var(--surface-2);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .runner {
+    width: 88px; height: 88px; border-radius: 20px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.18);
+  }
+  .progress-read {
+    position: absolute; top: 14px; left: 16px;
+    font-family: var(--font-mono); font-size: 12px; color: var(--muted);
+  }
+  .progress-read b { color: var(--accent); font-weight: 500; }
+
+  /* ---- install footer ---- */
+  .install {
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .install h2 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 20px; margin: 0 0 6px;
+  }
+  .install p { color: var(--muted); font-size: 14px; margin: 0 0 16px; max-width: 62ch; }
+  .install-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .install-card { border: 1px solid var(--line); border-radius: 12px; padding: 16px; background: var(--surface); }
+  .install-card .lbl {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--accent-2); margin: 0 0 4px;
+  }
+  .install-card .cap { font-size: 13px; color: var(--muted); margin: 0 0 10px; }
+
+  footer.sig {
+    margin-top: 40px;
+    font-family: var(--font-mono); font-size: 12px; color: var(--muted);
+    display: flex; flex-wrap: wrap; gap: 6px 14px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn, .play, .lift { transition: none; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Astra · gsap skill</p>
+    <h1>Motion Lab — feel each <span class="lit">GSAP</span> effect</h1>
+    <p class="lede">Every recipe from the gsap skill, live. Hit <strong>Play</strong> on any card to run the effect, then read the exact code beside it. Nothing is hidden until you ask for it — the page sits at rest, motion is one click away.</p>
+
+    <div class="bar">
+      <button class="btn" id="playAll">Play all entrances</button>
+      <button class="toggle" id="themeBtn">◐ Theme</button>
+    </div>
+    <div class="rm-note" id="rmNote" hidden>Your system prefers reduced motion. Effects here play only when you click — none run on their own.</div>
+  </header>
+
+  <div class="grid" id="grid">
+
+    <!-- Fade up -->
+    <div class="card" data-fx="fadeUp">
+      <div class="card-head">
+        <h3 class="card-title">Fade up</h3>
+      </div>
+      <p class="card-desc">The default reveal. Arrives from below and settles.</p>
+      <div class="stage"><div class="obj" data-target>A</div></div>
+      <div class="tags"><span class="tag">y: 24</span><span class="tag ac">power3.out</span><span class="tag">0.6s</span></div>
+      <div class="card-foot"><button class="play">▶ Play</button></div>
+      <pre><span class="k">gsap</span>.from(el, {
+  opacity: 0, y: <span class="s">24</span>,
+  duration: <span class="s">0.6</span>, ease: <span class="s">"power3.out"</span>
+})</pre>
+    </div>
+
+    <!-- Slide in -->
+    <div class="card" data-fx="slideIn">
+      <div class="card-head">
+        <h3 class="card-title">Slide in</h3>
+      </div>
+      <p class="card-desc">Panels, drawers, toasts. Enters from the right edge.</p>
+      <div class="stage"><div class="panel" data-target>Panel</div></div>
+      <div class="tags"><span class="tag">xPercent: 100</span><span class="tag ac">power3.out</span><span class="tag">0.5s</span></div>
+      <div class="card-foot"><button class="play">▶ Play</button></div>
+      <pre><span class="k">gsap</span>.from(panel, {
+  xPercent: <span class="s">100</span>,
+  duration: <span class="s">0.5</span>, ease: <span class="s">"power3.out"</span>
+})</pre>
+    </div>
+
+    <!-- Stagger -->
+    <div class="card" data-fx="stagger">
+      <div class="card-head">
+        <h3 class="card-title">Stagger</h3>
+      </div>
+      <p class="card-desc">A list arriving one item after another.</p>
+      <div class="stage">
+        <div class="dot" data-target></div><div class="dot" data-target></div>
+        <div class="dot" data-target></div><div class="dot" data-target></div>
+        <div class="dot" data-target></div>
+      </div>
+      <div class="tags"><span class="tag">stagger: 0.08</span><span class="tag ac">power3.out</span><span class="tag">y: 20</span></div>
+      <div class="card-foot"><button class="play">▶ Play</button></div>
+      <pre><span class="k">gsap</span>.from(items, {
+  opacity: 0, y: <span class="s">20</span>,
+  stagger: <span class="s">0.08</span>, ease: <span class="s">"power3.out"</span>
+})</pre>
+    </div>
+
+    <!-- Pop -->
+    <div class="card" data-fx="pop">
+      <div class="card-head">
+        <h3 class="card-title">Pop</h3>
+      </div>
+      <p class="card-desc">Badges, added-to-cart, success. A little overshoot.</p>
+      <div class="stage"><div class="badge" data-target>Added ✓</div></div>
+      <div class="tags"><span class="tag">scale: 0</span><span class="tag ac">back.out(1.7)</span><span class="tag">0.4s</span></div>
+      <div class="card-foot"><button class="play">▶ Play</button></div>
+      <pre><span class="k">gsap</span>.from(badge, {
+  scale: <span class="s">0</span>,
+  duration: <span class="s">0.4</span>, ease: <span class="s">"back.out(1.7)"</span>
+})</pre>
+    </div>
+
+    <!-- Elastic -->
+    <div class="card" data-fx="elastic">
+      <div class="card-head">
+        <h3 class="card-title">Elastic</h3>
+      </div>
+      <p class="card-desc">Strong personality — use sparingly. Springs into place.</p>
+      <div class="stage"><div class="obj" style="background:var(--accent-2)" data-target>↯</div></div>
+      <div class="tags"><span class="tag">scale: 0</span><span class="tag ac">elastic.out(1, 0.5)</span><span class="tag">0.9s</span></div>
+      <div class="card-foot"><button class="play">▶ Play</button></div>
+      <pre><span class="k">gsap</span>.from(el, {
+  scale: <span class="s">0</span>, rotation: <span class="s">-90</span>,
+  ease: <span class="s">"elastic.out(1, 0.5)"</span>, duration: <span class="s">0.9</span>
+})</pre>
+    </div>
+
+    <!-- Count up -->
+    <div class="card" data-fx="countUp">
+      <div class="card-head">
+        <h3 class="card-title">Count up</h3>
+      </div>
+      <p class="card-desc">Tween a plain object, write the value on each frame.</p>
+      <div class="stage"><div class="num" data-target>0</div></div>
+      <div class="tags"><span class="tag">0 → 1,280</span><span class="tag ac">power2.out</span><span class="tag">1.2s</span></div>
+      <div class="card-foot"><button class="play">▶ Play</button></div>
+      <pre><span class="k">gsap</span>.to(obj, {
+  val: <span class="s">1280</span>, duration: <span class="s">1.2</span>,
+  onUpdate: () => el.textContent =
+    Math.round(obj.val).toLocaleString()
+})</pre>
+    </div>
+
+    <!-- Timeline -->
+    <div class="card" data-fx="timeline">
+      <div class="card-head">
+        <h3 class="card-title">Timeline</h3>
+      </div>
+      <p class="card-desc">Then this, then that. Sequenced with overlap.</p>
+      <div class="stage" style="gap:8px">
+        <div class="chip" data-target>one</div>
+        <div class="chip" data-target>two</div>
+        <div class="chip" data-target>three</div>
+      </div>
+      <div class="tags"><span class="tag">tl.from()</span><span class="tag ac">-=0.25 overlap</span><span class="tag">chained</span></div>
+      <div class="card-foot"><button class="play">▶ Play</button></div>
+      <pre>tl.from(a, { y: <span class="s">20</span>, opacity: 0 })
+  .from(b, { y: <span class="s">20</span>, opacity: 0 }, <span class="s">"-=0.25"</span>)
+  .from(c, { y: <span class="s">20</span>, opacity: 0 }, <span class="s">"-=0.25"</span>)</pre>
+    </div>
+
+    <!-- Hover lift -->
+    <div class="card" data-fx="hover">
+      <div class="card-head">
+        <h3 class="card-title">Hover lift</h3>
+      </div>
+      <p class="card-desc">Micro-feedback. No Play button — just hover or focus it.</p>
+      <div class="stage"><button class="lift" data-target>Hover me</button></div>
+      <div class="tags"><span class="tag">scale: 1.06</span><span class="tag ac">power2.out</span><span class="tag">0.2s</span></div>
+      <div class="card-foot"><span class="hint">↑ interactive on hover / keyboard focus</span></div>
+      <pre>el.onmouseenter = () => <span class="k">gsap</span>.to(el,
+  { scale: <span class="s">1.06</span>, y: <span class="s">-4</span>, duration: <span class="s">0.2</span> })
+el.onmouseleave = () => <span class="k">gsap</span>.to(el,
+  { scale: <span class="s">1</span>, y: <span class="s">0</span>, duration: <span class="s">0.2</span> })</pre>
+    </div>
+
+  </div>
+
+  <!-- Scroll-linked section -->
+  <section class="scroll-sec">
+    <h2>Scroll-linked (ScrollTrigger)</h2>
+    <p>Scroll through this box. The square's position, rotation and scale are tied to scroll progress with <code>scrub: true</code> — it stays visible the whole way, never hidden.</p>
+    <div class="track" id="track">
+      <div class="progress-read">progress <b id="prog">0%</b></div>
+      <div class="runner" id="runner">GS</div>
+    </div>
+    <pre style="margin-top:16px"><span class="k">gsap</span>.to(runner, {
+  xPercent: <span class="s">140</span>, rotation: <span class="s">180</span>, scale: <span class="s">0.7</span>, ease: <span class="s">"none"</span>,
+  scrollTrigger: { trigger: track, start: <span class="s">"top 80%"</span>, end: <span class="s">"bottom 20%"</span>, scrub: <span class="k">true</span> }
+})</pre>
+  </section>
+
+  <!-- Install -->
+  <section class="install">
+    <h2>Using it in a real project</h2>
+    <p>This skill is the recipe book — the GSAP library itself lives in each project. Pick one way to load it, then paste any recipe above. All plugins (SplitText, DrawSVG…) ship free in 3.13+.</p>
+    <div class="install-grid">
+      <div class="install-card">
+        <p class="lbl">Option A · CDN</p>
+        <p class="cap">Fastest — plain HTML or a prototype. Nothing to install.</p>
+        <pre>&lt;script src=<span class="s">"…/gsap/3.13.0/gsap.min.js"</span>&gt;&lt;/script&gt;</pre>
+      </div>
+      <div class="install-card">
+        <p class="lbl">Option B · npm</p>
+        <p class="cap">React, Vue, or any build setup.</p>
+        <pre>npm install gsap
+<span class="k">import</span> { gsap } <span class="k">from</span> <span class="s">"gsap"</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <footer class="sig">
+    <span>Astra · gsap skill</span>
+    <span>GSAP 3.13.0</span>
+    <span>arrive slow (*.out), leave fast (*.in)</span>
+  </footer>
+</div>
+
+<script>
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced) document.getElementById("rmNote").hidden = false;
+
+  // ---- theme toggle (per-viewer convenience) ----
+  const root = document.documentElement;
+  const themeBtn = document.getElementById("themeBtn");
+  function currentDark() {
+    const t = root.getAttribute("data-theme");
+    if (t) return t === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  themeBtn.addEventListener("click", () => {
+    root.setAttribute("data-theme", currentDark() ? "light" : "dark");
+    try { localStorage.setItem("motionlab-theme", root.getAttribute("data-theme")); } catch (e) {}
+  });
+  try {
+    const saved = localStorage.getItem("motionlab-theme");
+    if (saved) root.setAttribute("data-theme", saved);
+  } catch (e) {}
+
+  // ---- per-card effects ----
+  const D = 1; // duration scale (kept full; motion is the content, played on explicit click)
+
+  function targets(card) { return card.querySelectorAll("[data-target]"); }
+
+  const effects = {
+    fadeUp(card) {
+      gsap.fromTo(targets(card), { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.6 * D, ease: "power3.out" });
+    },
+    slideIn(card) {
+      gsap.fromTo(targets(card), { xPercent: 100 },
+        { xPercent: 0, duration: 0.5 * D, ease: "power3.out" });
+    },
+    stagger(card) {
+      gsap.fromTo(targets(card), { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5 * D, ease: "power3.out", stagger: 0.08 });
+    },
+    pop(card) {
+      gsap.fromTo(targets(card), { scale: 0 },
+        { scale: 1, duration: 0.4 * D, ease: "back.out(1.7)" });
+    },
+    elastic(card) {
+      gsap.fromTo(targets(card), { scale: 0, rotation: -90 },
+        { scale: 1, rotation: 0, duration: 0.9 * D, ease: "elastic.out(1, 0.5)" });
+    },
+    countUp(card) {
+      const el = card.querySelector("[data-target]");
+      const obj = { val: 0 };
+      gsap.to(obj, {
+        val: 1280, duration: 1.2 * D, ease: "power2.out",
+        onUpdate: () => { el.textContent = Math.round(obj.val).toLocaleString(); },
+      });
+    },
+    timeline(card) {
+      const [a, b, c] = targets(card);
+      const tl = gsap.timeline({ defaults: { duration: 0.5 * D, ease: "power3.out" } });
+      tl.fromTo(a, { opacity: 0, y: 20 }, { opacity: 1, y: 0 })
+        .fromTo(b, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, "-=0.25")
+        .fromTo(c, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, "-=0.25");
+    },
+  };
+
+  document.querySelectorAll(".card").forEach((card) => {
+    const fx = card.dataset.fx;
+    const btn = card.querySelector(".play");
+    if (btn && effects[fx]) btn.addEventListener("click", () => effects[fx](card));
+
+    if (fx === "hover") {
+      const el = card.querySelector("[data-target]");
+      const up = () => gsap.to(el, { scale: 1.06, y: -4, duration: 0.2, ease: "power2.out" });
+      const down = () => gsap.to(el, { scale: 1, y: 0, duration: 0.2, ease: "power2.out" });
+      el.addEventListener("mouseenter", up);
+      el.addEventListener("mouseleave", down);
+      el.addEventListener("focus", up);
+      el.addEventListener("blur", down);
+    }
+  });
+
+  // ---- play all entrances ----
+  document.getElementById("playAll").addEventListener("click", () => {
+    ["fadeUp", "slideIn", "stagger", "pop", "elastic", "countUp", "timeline"].forEach((fx, i) => {
+      const card = document.querySelector(`.card[data-fx="${fx}"]`);
+      if (card) gsap.delayedCall(i * 0.12, () => effects[fx](card));
+    });
+  });
+
+  // ---- ScrollTrigger demo (stays visible; scrub-linked) ----
+  gsap.registerPlugin(ScrollTrigger);
+  const runner = document.getElementById("runner");
+  const progEl = document.getElementById("prog");
+  gsap.to(runner, {
+    xPercent: 140, rotation: 180, scale: 0.7, ease: "none",
+    scrollTrigger: {
+      trigger: "#track",
+      start: "top 80%",
+      end: "bottom 20%",
+      scrub: true,
+      onUpdate: (self) => { progEl.textContent = Math.round(self.progress * 100) + "%"; },
+    },
+  });
+</script>
