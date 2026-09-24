@@ -6,6 +6,11 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-09-24
+
+- [workflow] Convergence update
+  - summary: Add Commit & Push Discipline: batch commits by concern but carry full blast radius (specs/tests/fixtures/assertions of deleted code); read hook chain (lint casing, pre-push tests/spec-baseline) before committing
+
 ### 2026-09-08
 
 - [evolving] Convergence update

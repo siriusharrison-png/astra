@@ -61,6 +61,11 @@ When a task needs throwaway scaffolding to verify a flow — a mock, a hardcoded
 - **Every unresolved integration point gets an accurate marker.** Anything awaiting a real API, a backend contract, or a later replacement must carry a precise `TODO` / `MOCK` note stating the root cause and the exact alignment needed — not a vague "fix later." A leftover marker is a real statement, not filler; keep it truthful.
 - **Escalate the markers into the PR.** The PR description must call out every pending-integration and mock-replacement item explicitly so reviewers and backend can act on it; do not rely on in-code comments alone.
 
+## Commit & Push Discipline
+
+- **Batch commits by concern, but carry each concern's full blast radius.** A "delete X" batch must also include X's specs, tests, fixtures, and any assertion that hardcodes X's strings — not just source files. Pre-push validation runs against the whole tree, so leftover references to deleted code block the push even when each commit looks clean alone.
+- **Read the hook chain before committing, not at push time.** Grep for commit/push hooks up front. Common blockers: lint rejecting commit-subject casing; pre-push running related tests or spec-baseline checks. When intentionally changing user-facing copy, grep tests for the old string and fix assertions in the same batch.
+
 ## Step 4: Review the Result
 
 After the main task is done, review:
