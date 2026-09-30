@@ -6,6 +6,13 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-09-30
+
+- [patterns] Skeleton Loading & Transition Pattern (骨架加载与切换过渡)
+  - source: 一次控制台改造中列表/详情/指标/日志页加载态的抽象
+  - file: patterns.md
+  - summary: 加载态用扫光骨架优于 spinner/pulse；加载标志初始为加载中、首帧落定才解除，空态判定排在加载判定之后以消除假空态闪烁；视图切换用淡入而非硬替换
+
 ### 2026-09-24
 
 - [workflow] Convergence update
