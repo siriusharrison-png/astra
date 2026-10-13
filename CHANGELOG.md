@@ -8,6 +8,13 @@ The changelog is append-only.
 
 ### 2026-10-13
 
+- [patterns] Convergence update
+  - source: JieKou console sidebar accordion animation fix (commit bb5b648a)
+  - action: new pattern in patterns.md
+  - summary: Add 'Entrance Animation by Trigger Source' pattern: gate entrance animation on the user interaction (closed→open edge), not on open-state; mount-open renders final-style silently. Keyframes fire on mount, CSS transitions don't. Note structural root cause (unshared layout remount).
+
+### 2026-10-13
+
 - [reference] Convergence update
   - summary: 新增 pre-push-self-check 协议：推送远程前先读项目 CI 配置、本地跑等价 gate（typecheck/lint/build/test/i18n 等）、全绿才 push；跨项目生效、纯行为协议不装 git hook
 
