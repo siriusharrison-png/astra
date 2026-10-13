@@ -6,6 +6,31 @@ The changelog is append-only.
 
 ## Unreleased
 
+### 2026-10-13
+
+- [reference] Convergence update
+  - summary: 新增 pre-push-self-check 协议：推送远程前先读项目 CI 配置、本地跑等价 gate（typecheck/lint/build/test/i18n 等）、全绿才 push；跨项目生效、纯行为协议不装 git hook
+
+### 2026-10-13
+
+- [reference] Convergence update
+  - summary: 更新 component-library 定位轴条目：左对齐锚定表格右缘+8px、hover 向右延伸、dot 移至横线右侧、hook 改名 usePricingTocLeft；补充用 getComputedStyle 还原内容区右缘优于固定 buffer
+
+### 2026-10-13
+
+- [evolving] Convergence update
+  - source: jiekou-home pricing-page scroll-spy axis fix
+  - action: created references/component-library.md
+  - file: references/component-library.md
+  - summary: New cross-product catalog for special component/interaction/motion implementations, distinct from the naming-only ui-naming-dictionary.md. First entry: jiekou pricing-page scroll-spy axis — runtime-measured positioning instead of breakpoint formulas, unified hover state source instead of mixed JS/CSS state, hysteresis band for stable nearest-item selection under pointer jitter.
+
+### 2026-09-30
+
+- [evolving] Monthly Summary Workflow (月度总结机制)
+  - source: 8个月飞书月度总结实践 (2-9月)
+  - action: 记录采集+文档结构+入口模板到 workflow
+  - summary: 自然月精确区间采集全部git仓库→按工作项目(PPIO/接口/Novita)与个人项目分组→飞书wiki每月子节点(项目总结表/各项目细节/全量数据支撑)+父节点cite降序入口
+
 ### 2026-09-30
 
 - [patterns] Skeleton Loading & Transition Pattern (骨架加载与切换过渡)
